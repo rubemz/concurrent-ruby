@@ -111,6 +111,31 @@ other to reach a common barrier point.</p>
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_barrier'>barrier</span> <span class='op'>=</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>CyclicBarrier</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>3</span><span class='rparen'>)</span>
+<span class='id identifier rubyid_jobs'>jobs</span>    <span class='op'>=</span> <span class='const'>Array</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='int'>3</span><span class='rparen'>)</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span> <span class='tlambda'>-&gt;</span> <span class='tlambeg'>{</span> <span class='id identifier rubyid_sleep'>sleep</span> <span class='id identifier rubyid_i'>i</span><span class='semicolon'>;</span> <span class='id identifier rubyid_p'>p</span> <span class='label'>done:</span> <span class='id identifier rubyid_i'>i</span> <span class='rbrace'>}</span> <span class='rbrace'>}</span>
+<span class='id identifier rubyid_process'>process</span> <span class='op'>=</span> <span class='tlambda'>-&gt;</span> <span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span><span class='rparen'>)</span> <span class='kw'>do</span>
+  <span class='comment'># waiting to start at the same time
+</span>  <span class='id identifier rubyid_barrier'>barrier</span><span class='period'>.</span><span class='id identifier rubyid_wait'>wait</span>
+  <span class='comment'># execute job
+</span>  <span class='id identifier rubyid_jobs'>jobs</span><span class='lbracket'>[</span><span class='id identifier rubyid_i'>i</span><span class='rbracket'>]</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span>
+  <span class='comment'># wait for others to finish
+</span>  <span class='id identifier rubyid_barrier'>barrier</span><span class='period'>.</span><span class='id identifier rubyid_wait'>wait</span>
+<span class='kw'>end</span>
+<span class='id identifier rubyid_threads'>threads</span> <span class='op'>=</span> <span class='int'>2</span><span class='period'>.</span><span class='id identifier rubyid_times'>times</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_i'>i</span><span class='op'>|</span>
+  <span class='const'>Thread</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_i'>i</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_process'>process</span><span class='rparen'>)</span>
+<span class='kw'>end</span>
+
+<span class='comment'># use main as well
+</span><span class='id identifier rubyid_process'>process</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span> <span class='int'>2</span>
+
+<span class='comment'># here we can be sure that all jobs are processed  </span></code></pre>
+    
+  </div>
+
 
 </div>
 
@@ -354,21 +379,21 @@ the last thread arrives and before the others are released</p>
       <pre class="lines">
 
 
-20
-21
-22
-23
-24
-25
-26</pre>
+40
+41
+42
+43
+44
+45
+46</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 40</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_parties'>parties</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
-  <span class='kw'>if</span> <span class='op'>!</span><span class='id identifier rubyid_parties'>parties</span><span class='period'>.</span><span class='id identifier rubyid_is_a?'>is_a?</span><span class='lparen'>(</span><span class='const'>Fixnum</span><span class='rparen'>)</span> <span class='op'>||</span> <span class='id identifier rubyid_parties'>parties</span> <span class='op'>&lt;</span> <span class='int'>1</span>
-    <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>count must be in integer greater than or equal zero</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-  <span class='kw'>end</span>
+  <span class='const'>Utility</span><span class='op'>::</span><span class='const'>NativeInteger</span><span class='period'>.</span><span class='id identifier rubyid_ensure_integer_and_bounds'>ensure_integer_and_bounds</span> <span class='id identifier rubyid_parties'>parties</span>
+  <span class='const'>Utility</span><span class='op'>::</span><span class='const'>NativeInteger</span><span class='period'>.</span><span class='id identifier rubyid_ensure_positive_and_no_zero'>ensure_positive_and_no_zero</span> <span class='id identifier rubyid_parties'>parties</span>
+
   <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_ns_initialize'>ns_initialize</span> <span class='id identifier rubyid_parties'>parties</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span> <span class='rbrace'>}</span>
 <span class='kw'>end</span></pre>
@@ -433,12 +458,12 @@ the last thread arrives and before the others are released</p>
       <pre class="lines">
 
 
-85
-86
-87</pre>
+105
+106
+107</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 85</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 105</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_broken?'>broken?</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@generation</span><span class='period'>.</span><span class='id identifier rubyid_status'>status</span> <span class='op'>!=</span> <span class='symbol'>:waiting</span> <span class='rbrace'>}</span>
@@ -490,12 +515,12 @@ the last thread arrives and before the others are released</p>
       <pre class="lines">
 
 
-34
-35
-36</pre>
+54
+55
+56</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 54</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_number_waiting'>number_waiting</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@number_waiting</span> <span class='rbrace'>}</span>
@@ -547,12 +572,12 @@ the last thread arrives and before the others are released</p>
       <pre class="lines">
 
 
-29
-30
-31</pre>
+49
+50
+51</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 29</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 49</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_parties'>parties</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='ivar'>@parties</span> <span class='rbrace'>}</span>
@@ -603,12 +628,12 @@ If the barrier is broken, this method restores it to the original state</p>
       <pre class="lines">
 
 
-75
-76
-77</pre>
+95
+96
+97</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 75</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 95</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reset'>reset</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_ns_generation_done'>ns_generation_done</span> <span class='ivar'>@generation</span><span class='comma'>,</span> <span class='symbol'>:reset</span> <span class='rbrace'>}</span>
@@ -686,31 +711,31 @@ If a block has been passed to the constructor, it will be executed once by
       <pre class="lines">
 
 
-46
-47
-48
-49
-50
-51
-52
-53
-54
-55
-56
-57
-58
-59
-60
-61
-62
-63
-64
-65
 66
-67</pre>
+67
+68
+69
+70
+71
+72
+73
+74
+75
+76
+77
+78
+79
+80
+81
+82
+83
+84
+85
+86
+87</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 46</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/atomic/cyclic_barrier.rb', line 66</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait'>wait</span><span class='lparen'>(</span><span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='kw'>do</span>
@@ -744,9 +769,9 @@ If a block has been passed to the constructor, it will be executed once by
 </div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:07:04 2016 by
+  Generated on Tue Dec 27 03:08:37 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>

@@ -134,14 +134,14 @@ Haskell and Scala do it today.</p>
 <p>Object references in Ruby are mutable. This can lead to serious
 problems when the <span class='object_link'><a href="Concern/Dereferenceable.html#value-instance_method" title="Concurrent::Concern::Dereferenceable#value (method)">Concern::Dereferenceable#value</a></span> of an object is a mutable reference. Which
 is always the case unless the value is a <code>Fixnum</code>, <code>Symbol</code>, or similar
-&quot;primative&quot; data type. Each instance can be configured with a few
+&quot;primitive&quot; data type. Each instance can be configured with a few
 options that can help protect the program from potentially dangerous
-operations. Each of these options can be optionally set when the oject
+operations. Each of these options can be optionally set when the object
 instance is created:</p>
 
 <ul>
 <li><code>:dup_on_deref</code> When true the object will call the <code>#dup</code> method on
-the <code>value</code> object every time the <code>#value</code> methid is called
+the <code>value</code> object every time the <code>#value</code> method is called
 (default: false)</li>
 <li><code>:freeze_on_deref</code> When true the object will call the <code>#freeze</code>
 method on the <code>value</code> object every time the <code>#value</code> method is called
@@ -357,7 +357,7 @@ to produce a value.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#modify%21-instance_method" title="#modify! (instance method)">- (Object) <strong>modify!</strong> </a>
+      <a href="#modify%21-instance_method" title="#modify! (instance method)">- (undocumented) <strong>modify!</strong> </a>
     
 
     
@@ -403,7 +403,7 @@ to produce a value.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#set%21-instance_method" title="#set! (instance method)">- (Object) <strong>set!</strong>(value) </a>
+      <a href="#set%21-instance_method" title="#set! (instance method)">- (undocumented) <strong>set!</strong>(value) </a>
     
 
     
@@ -449,7 +449,7 @@ to produce a value.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#try_put%21-instance_method" title="#try_put! (instance method)">- (Object) <strong>try_put!</strong>(value) </a>
+      <a href="#try_put%21-instance_method" title="#try_put! (instance method)">- (undocumented) <strong>try_put!</strong>(value) </a>
     
 
     
@@ -472,7 +472,7 @@ to produce a value.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#try_take%21-instance_method" title="#try_take! (instance method)">- (Object) <strong>try_take!</strong> </a>
+      <a href="#try_take%21-instance_method" title="#try_take! (instance method)">- (undocumented) <strong>try_take!</strong> </a>
     
 
     
@@ -955,7 +955,7 @@ if the time is exceeded.</p>
       <div class="method_details ">
   <h3 class="signature " id="modify!-instance_method">
   
-    - (<tt>Object</tt>) <strong>modify!</strong> 
+    - (<tt>undocumented</tt>) <strong>modify!</strong> 
   
 
   
@@ -1111,7 +1111,7 @@ which case it returns <code>TIMEOUT</code> if the time is exceeded.</p>
       <div class="method_details ">
   <h3 class="signature " id="set!-instance_method">
   
-    - (<tt>Object</tt>) <strong>set!</strong>(value) 
+    - (<tt>undocumented</tt>) <strong>set!</strong>(value) 
   
 
   
@@ -1244,7 +1244,7 @@ which case it returns <code>TIMEOUT</code> if the time is exceeded.</p>
       <div class="method_details ">
   <h3 class="signature " id="try_put!-instance_method">
   
-    - (<tt>Object</tt>) <strong>try_put!</strong>(value) 
+    - (<tt>undocumented</tt>) <strong>try_put!</strong>(value) 
   
 
   
@@ -1300,7 +1300,7 @@ which case it returns <code>TIMEOUT</code> if the time is exceeded.</p>
       <div class="method_details ">
   <h3 class="signature " id="try_take!-instance_method">
   
-    - (<tt>Object</tt>) <strong>try_take!</strong> 
+    - (<tt>undocumented</tt>) <strong>try_take!</strong> 
   
 
   
@@ -1409,9 +1409,9 @@ by the <code>#set_deref_options</code> method.</p>
 </div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:06:58 2016 by
+  Generated on Tue Dec 27 03:08:32 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>

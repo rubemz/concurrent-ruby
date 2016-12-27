@@ -135,7 +135,7 @@ can be configured on behaviour initialization.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#core-instance_method" title="#core (instance method)">- (Object) <strong>core</strong> </a>
+      <a href="#core-instance_method" title="#core (instance method)">- (undocumented) <strong>core</strong> </a>
     
 
     
@@ -167,7 +167,7 @@ can be configured on behaviour initialization.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#subsequent-instance_method" title="#subsequent (instance method)">- (Object) <strong>subsequent</strong> </a>
+      <a href="#subsequent-instance_method" title="#subsequent (instance method)">- (undocumented) <strong>subsequent</strong> </a>
     
 
     
@@ -199,7 +199,7 @@ can be configured on behaviour initialization.</p>
       <li class="public ">
   <span class="summary_signature">
     
-      <a href="#terminated-instance_method" title="#terminated (instance method)">- (Object) <strong>terminated</strong> </a>
+      <a href="#terminated-instance_method" title="#terminated (instance method)">- (undocumented) <strong>terminated</strong> </a>
     
 
     
@@ -264,7 +264,7 @@ can be configured on behaviour initialization.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#on_envelope-instance_method" title="#on_envelope (instance method)">- (Object) <strong>on_envelope</strong>(envelope) </a>
+      <a href="#on_envelope-instance_method" title="#on_envelope (instance method)">- (undocumented) <strong>on_envelope</strong>(envelope) </a>
     
 
     
@@ -286,7 +286,7 @@ can be configured on behaviour initialization.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#terminate%21-instance_method" title="#terminate! (instance method)">- (Object) <strong>terminate!</strong>(reason = nil, envelope = nil) </a>
+      <a href="#terminate%21-instance_method" title="#terminate! (instance method)">- (undocumented) <strong>terminate!</strong>(reason = nil, envelope = nil) </a>
     
 
     
@@ -332,7 +332,7 @@ can be configured on behaviour initialization.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#trapping%3D-instance_method" title="#trapping= (instance method)">- (Object) <strong>trapping=</strong>(val) </a>
+      <a href="#trapping%3D-instance_method" title="#trapping= (instance method)">- (undocumented) <strong>trapping=</strong>(val) </a>
     
 
     
@@ -426,8 +426,8 @@ can be configured on behaviour initialization.</p>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_core'>core</span><span class='comma'>,</span> <span class='id identifier rubyid_subsequent'>subsequent</span><span class='comma'>,</span> <span class='id identifier rubyid_core_options'>core_options</span><span class='comma'>,</span> <span class='id identifier rubyid_trapping'>trapping</span> <span class='op'>=</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='id identifier rubyid_terminate_children'>terminate_children</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='kw'>super</span> <span class='id identifier rubyid_core'>core</span><span class='comma'>,</span> <span class='id identifier rubyid_subsequent'>subsequent</span><span class='comma'>,</span> <span class='id identifier rubyid_core_options'>core_options</span>
-  <span class='ivar'>@terminated</span>         <span class='op'>=</span> <span class='const'>Concurrent</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span>
-  <span class='ivar'>@public_terminated</span>  <span class='op'>=</span> <span class='ivar'>@terminated</span><span class='period'>.</span><span class='id identifier rubyid_hide_completable'>hide_completable</span>
+  <span class='ivar'>@terminated</span>         <span class='op'>=</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>Promises</span><span class='period'>.</span><span class='id identifier rubyid_resolvable_future'>resolvable_future</span>
+  <span class='ivar'>@public_terminated</span>  <span class='op'>=</span> <span class='ivar'>@terminated</span><span class='period'>.</span><span class='id identifier rubyid_with_hidden_resolvable'>with_hidden_resolvable</span>
   <span class='ivar'>@trapping</span>           <span class='op'>=</span> <span class='id identifier rubyid_trapping'>trapping</span>
   <span class='ivar'>@terminate_children</span> <span class='op'>=</span> <span class='id identifier rubyid_terminate_children'>terminate_children</span>
 <span class='kw'>end</span></pre>
@@ -446,7 +446,7 @@ can be configured on behaviour initialization.</p>
       <div class="method_details first">
   <h3 class="signature first" id="core-instance_method">
   
-    - (<tt>Object</tt>) <strong>core</strong>  <span class="extras">(readonly)</span>
+    - (<tt>undocumented</tt>) <strong>core</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -474,7 +474,7 @@ can be configured on behaviour initialization.</p>
       <div class="method_details ">
   <h3 class="signature " id="subsequent-instance_method">
   
-    - (<tt>Object</tt>) <strong>subsequent</strong>  <span class="extras">(readonly)</span>
+    - (<tt>undocumented</tt>) <strong>subsequent</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -502,7 +502,7 @@ can be configured on behaviour initialization.</p>
       <div class="method_details ">
   <h3 class="signature " id="terminated-instance_method">
   
-    - (<tt>Object</tt>) <strong>terminated</strong>  <span class="extras">(readonly)</span>
+    - (<tt>undocumented</tt>) <strong>terminated</strong>  <span class="extras">(readonly)</span>
   
 
   
@@ -548,7 +548,7 @@ can be configured on behaviour initialization.</p>
       <div class="method_details first">
   <h3 class="signature first" id="on_envelope-instance_method">
   
-    - (<tt>Object</tt>) <strong>on_envelope</strong>(envelope) 
+    - (<tt>undocumented</tt>) <strong>on_envelope</strong>(envelope) 
   
 
   
@@ -625,7 +625,7 @@ can be configured on behaviour initialization.</p>
       <div class="method_details ">
   <h3 class="signature " id="terminate!-instance_method">
   
-    - (<tt>Object</tt>) <strong>terminate!</strong>(reason = nil, envelope = nil) 
+    - (<tt>undocumented</tt>) <strong>terminate!</strong>(reason = nil, envelope = nil) 
   
 
   
@@ -673,15 +673,15 @@ Terminates all its children, does not wait until they are terminated.</p>
 <span class='kw'>def</span> <span class='id identifier rubyid_terminate!'>terminate!</span><span class='lparen'>(</span><span class='id identifier rubyid_reason'>reason</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_envelope'>envelope</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='kw'>return</span> <span class='kw'>true</span> <span class='kw'>if</span> <span class='id identifier rubyid_terminated?'>terminated?</span>
 
-  <span class='id identifier rubyid_self_termination'>self_termination</span> <span class='op'>=</span> <span class='const'>Concurrent</span><span class='period'>.</span><span class='id identifier rubyid_completed_future'>completed_future</span><span class='lparen'>(</span><span class='id identifier rubyid_reason'>reason</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_self_termination'>self_termination</span> <span class='op'>=</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>Promises</span><span class='period'>.</span><span class='id identifier rubyid_resolved_future'>resolved_future</span><span class='lparen'>(</span><span class='id identifier rubyid_reason'>reason</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>||</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_all_terminations'>all_terminations</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='ivar'>@terminate_children</span>
-                       <span class='const'>Concurrent</span><span class='period'>.</span><span class='id identifier rubyid_zip'>zip</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ch'>ch</span><span class='op'>|</span> <span class='id identifier rubyid_ch'>ch</span><span class='period'>.</span><span class='id identifier rubyid_ask'>ask</span><span class='lparen'>(</span><span class='symbol'>:terminate!</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_self_termination'>self_termination</span><span class='rparen'>)</span>
+                       <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>Promises</span><span class='period'>.</span><span class='id identifier rubyid_zip'>zip</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_children'>children</span><span class='period'>.</span><span class='id identifier rubyid_map'>map</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_ch'>ch</span><span class='op'>|</span> <span class='id identifier rubyid_ch'>ch</span><span class='period'>.</span><span class='id identifier rubyid_ask'>ask</span><span class='lparen'>(</span><span class='symbol'>:terminate!</span><span class='rparen'>)</span> <span class='rbrace'>}</span><span class='comma'>,</span> <span class='id identifier rubyid_self_termination'>self_termination</span><span class='rparen'>)</span>
                      <span class='kw'>else</span>
                        <span class='id identifier rubyid_self_termination'>self_termination</span>
                      <span class='kw'>end</span>
 
-  <span class='id identifier rubyid_all_terminations'>all_terminations</span><span class='period'>.</span><span class='id identifier rubyid_chain_completable'>chain_completable</span><span class='lparen'>(</span><span class='ivar'>@terminated</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_all_terminations'>all_terminations</span><span class='period'>.</span><span class='id identifier rubyid_chain_completable'>chain_completable</span><span class='lparen'>(</span><span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_envelope'>envelope</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span>
+  <span class='id identifier rubyid_all_terminations'>all_terminations</span><span class='period'>.</span><span class='id identifier rubyid_chain_resolvable'>chain_resolvable</span><span class='lparen'>(</span><span class='ivar'>@terminated</span><span class='rparen'>)</span>
+  <span class='id identifier rubyid_all_terminations'>all_terminations</span><span class='period'>.</span><span class='id identifier rubyid_chain_resolvable'>chain_resolvable</span><span class='lparen'>(</span><span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_envelope'>envelope</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span>
 
   <span class='id identifier rubyid_broadcast'>broadcast</span><span class='lparen'>(</span><span class='kw'>true</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='symbol'>:terminated</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='comment'># TODO do not end up in Dead Letter Router
 </span>  <span class='id identifier rubyid_parent'>parent</span> <span class='op'>&lt;&lt;</span> <span class='symbol'>:remove_child</span> <span class='kw'>if</span> <span class='id identifier rubyid_parent'>parent</span>
@@ -750,7 +750,7 @@ Terminates all its children, does not wait until they are terminated.</p>
       <pre class="code"><span class="info file"># File 'lib/concurrent/actor/behaviour/termination.rb', line 25</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_terminated?'>terminated?</span>
-  <span class='ivar'>@terminated</span><span class='period'>.</span><span class='id identifier rubyid_completed?'>completed?</span>
+  <span class='ivar'>@terminated</span><span class='period'>.</span><span class='id identifier rubyid_resolved?'>resolved?</span>
 <span class='kw'>end</span></pre>
     </td>
   </tr>
@@ -760,7 +760,7 @@ Terminates all its children, does not wait until they are terminated.</p>
       <div class="method_details ">
   <h3 class="signature " id="trapping=-instance_method">
   
-    - (<tt>Object</tt>) <strong>trapping=</strong>(val) 
+    - (<tt>undocumented</tt>) <strong>trapping=</strong>(val) 
   
 
   
@@ -853,9 +853,9 @@ Terminates all its children, does not wait until they are terminated.</p>
 </div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:07:06 2016 by
+  Generated on Tue Dec 27 03:08:38 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>

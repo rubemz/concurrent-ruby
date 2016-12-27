@@ -115,7 +115,7 @@ which will eventually contain the result of the method call.</p>
 When an Erlang module implements the <code>gen_server</code> behavior it becomes
 inherently asynchronous. The <code>start</code> or <code>start_link</code> function spawns a
 process (similar to a thread but much more lightweight and efficient) and
-reurns the ID of the process. Using the process ID, other processes can
+returns the ID of the process. Using the process ID, other processes can
 send messages to the <code>gen_server</code> via the <code>cast</code> and <code>call</code> methods. Unlike
 Erlang&#39;s <code>gen_server</code>, however, <code>Async</code> classes do not support linking or
 supervision trees.</p>
@@ -220,7 +220,7 @@ be accessed by one thread at a time. This is inherently thread-safe.</p>
 practice is to read the instance variable into a local variable at the start
 of the method then update the instance variable at the <em>end</em> of the method.
 This way, should an exception be raised during method execution the internal
-state of the boject will not have been changed.</p>
+state of the object will not have been changed.</p>
 
 <h3>Reader Attributes</h3>
 
@@ -756,9 +756,9 @@ requested method</p>
 </div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:06:57 2016 by
+  Generated on Tue Dec 27 03:08:31 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>

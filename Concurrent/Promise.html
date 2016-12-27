@@ -126,21 +126,22 @@ result of each promise is passed to each of its children upon resolution.
 When a promise is rejected all its children will be summarily rejected and
 will receive the reason.</p>
 
-<p>Promises have four possible states: <em>unscheduled</em>, <em>pending</em>, <em>rejected</em>,
-and <em>fulfilled</em>. A Promise created using <code>.new</code> will be <em>unscheduled</em>. It is
-scheduled by calling the <code>execute</code> method. Upon execution the Promise and
-all its children will be set to <em>pending</em>. When a promise is <em>pending</em> it
-will remain in that state until processing is complete. A completed Promise
-is either <em>rejected</em>, indicating that an exception was thrown during
-processing, or <em>fulfilled</em>, indicating it succeeded. If a Promise is
-<em>fulfilled</em> its <code>value</code> will be updated to reflect the result of the
-operation. If <em>rejected</em> the <code>reason</code> will be updated with a reference to
-the thrown exception. The predicate methods <code>unscheduled?</code>, <code>pending?</code>,
-<code>rejected?</code>, and <code>fulfilled?</code> can be called at any time to obtain the state
-of the Promise, as can the <code>state</code> method, which returns a symbol. A Promise
-created using <code>.execute</code> will be <em>pending</em>, a Promise created using
-<code>.fulfill(value)</code> will be <em>fulfilled</em> with the given value and a Promise
-created using <code>.reject(reason)</code> will be <em>rejected</em> with the given reason.</p>
+<p>Promises have several possible states: <em>:unscheduled</em>, <em>:pending</em>,
+<em>:processing</em>, <em>:rejected</em>, or <em>:fulfilled</em>. These are also aggregated as
+<code>#incomplete?</code> and <code>#complete?</code>. When a Promise is created it is set to
+<em>:unscheduled</em>. Once the <code>#execute</code> method is called the state becomes
+<em>:pending</em>. Once a job is pulled from the thread pool&#39;s queue and is given
+to a thread for processing (often immediately upon <code>#post</code>) the state
+becomes <em>:processing</em>. The future will remain in this state until processing
+is complete. A future that is in the <em>:unscheduled</em>, <em>:pending</em>, or
+<em>:processing</em> is considered <code>#incomplete?</code>. A <code>#complete?</code> Promise is either
+<em>:rejected</em>, indicating that an exception was thrown during processing, or
+<em>:fulfilled</em>, indicating success. If a Promise is <em>:fulfilled</em> its <code>#value</code>
+will be updated to reflect the result of the operation. If <em>:rejected</em> the
+<code>reason</code> will be updated with a reference to the thrown exception. The
+predicate methods <code>#unscheduled?</code>, <code>#pending?</code>, <code>#rejected?</code>, and
+<code>#fulfilled?</code> can be called at any time to obtain the state of the Promise,
+as can the <code>#state</code> method, which returns a symbol.</p>
 
 <p>Retrieving the value of a promise is done through the <code>value</code> (alias:
 <code>deref</code>) method. Obtaining the value of a promise is a potentially blocking
@@ -160,14 +161,14 @@ seconds to block.</p>
 <p>Object references in Ruby are mutable. This can lead to serious
 problems when the <span class='object_link'><a href="Concern/Obligation.html#value-instance_method" title="Concurrent::Concern::Obligation#value (method)">Concern::Obligation#value</a></span> of an object is a mutable reference. Which
 is always the case unless the value is a <code>Fixnum</code>, <code>Symbol</code>, or similar
-&quot;primative&quot; data type. Each instance can be configured with a few
+&quot;primitive&quot; data type. Each instance can be configured with a few
 options that can help protect the program from potentially dangerous
-operations. Each of these options can be optionally set when the oject
+operations. Each of these options can be optionally set when the object
 instance is created:</p>
 
 <ul>
 <li><code>:dup_on_deref</code> When true the object will call the <code>#dup</code> method on
-the <code>value</code> object every time the <code>#value</code> methid is called
+the <code>value</code> object every time the <code>#value</code> method is called
 (default: false)</li>
 <li><code>:freeze_on_deref</code> When true the object will call the <code>#freeze</code>
 method on the <code>value</code> object every time the <code>#value</code> method is called
@@ -210,7 +211,7 @@ or Haskell) as we are likely to get in Ruby.</p>
 </code></pre>
 
 <p>Promises can be chained using the <code>then</code> method. The <code>then</code> method accepts a
-block, to be executed on fulfillment, and a callable argument to be executed
+block and an executor, to be executed on fulfillment, and a callable argument to be executed
 on rejection. The result of the each promise is passed as the block argument
 to chained promises.</p>
 
@@ -222,7 +223,7 @@ to chained promises.</p>
 <pre class="code ruby"><code class="ruby"><span class='id identifier rubyid_p'>p</span> <span class='op'>=</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>Promise</span><span class='period'>.</span><span class='id identifier rubyid_fulfill'>fulfill</span><span class='lparen'>(</span><span class='int'>20</span><span class='rparen'>)</span><span class='period'>.</span>
     <span class='id identifier rubyid_then'>then</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span> <span class='id identifier rubyid_result'>result</span> <span class='op'>-</span> <span class='int'>10</span> <span class='rbrace'>}</span><span class='period'>.</span>
     <span class='id identifier rubyid_then'>then</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span> <span class='id identifier rubyid_result'>result</span> <span class='op'>*</span> <span class='int'>3</span> <span class='rbrace'>}</span><span class='period'>.</span>
-    <span class='id identifier rubyid_then'>then</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span> <span class='id identifier rubyid_result'>result</span> <span class='op'>%</span> <span class='int'>5</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span>
+    <span class='id identifier rubyid_then'>then</span><span class='lparen'>(</span><span class='label'>executor:</span> <span class='id identifier rubyid_different_executor'>different_executor</span><span class='rparen'>)</span><span class='lbrace'>{</span><span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span> <span class='id identifier rubyid_result'>result</span> <span class='op'>%</span> <span class='int'>5</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span>
 </code></pre>
 
 <p>The initial state of a newly created Promise depends on the state of its parent:</p>
@@ -235,7 +236,7 @@ to chained promises.</p>
 </ul>
 
 <p>Promises are executed asynchronously from the main thread. By the time a
-child Promise finishes nitialization it may be in a different state that its
+child Promise finishes intialization it may be in a different state than its
 parent (by the time a child is created its parent may have completed
 execution and changed state). Despite being asynchronous, however, the order
 of execution of Promise objects in a chain (or tree) is strictly defined.</p>
@@ -653,7 +654,7 @@ the parent reason.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#then-instance_method" title="#then (instance method)">- (Promise) <strong>then</strong>(rescuer = nil) { ... }</a>
+      <a href="#then-instance_method" title="#then (instance method)">- (Promise) <strong>then</strong>(rescuer = nil, executor = @executor) { ... }</a>
     
 
     
@@ -924,13 +925,13 @@ the task block on execution</p>
       <pre class="lines">
 
 
-208
-209
 210
-211</pre>
+211
+212
+213</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 208</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 210</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_opts'>opts</span><span class='period'>.</span><span class='id identifier rubyid_delete_if'>delete_if</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_k'>k</span><span class='comma'>,</span> <span class='id identifier rubyid_v'>v</span><span class='op'>|</span> <span class='id identifier rubyid_v'>v</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='rbrace'>}</span>
@@ -990,12 +991,12 @@ were not already executed.</p>
       <pre class="lines">
 
 
-426
-427
-428</pre>
+431
+432
+433</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 426</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 431</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_all?'>all?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_promises'>promises</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_aggregate'>aggregate</span><span class='lparen'>(</span><span class='symbol'>:all?</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_promises'>promises</span><span class='rparen'>)</span>
@@ -1080,12 +1081,12 @@ the promises given as arguments</p>
       <pre class="lines">
 
 
-437
-438
-439</pre>
+442
+443
+444</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 437</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 442</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_any?'>any?</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_promises'>promises</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_aggregate'>aggregate</span><span class='lparen'>(</span><span class='symbol'>:any?</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_promises'>promises</span><span class='rparen'>)</span>
@@ -1310,12 +1311,12 @@ the task block on execution</p>
       <pre class="lines">
 
 
-293
-294
-295</pre>
+295
+296
+297</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 293</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 295</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span>
@@ -1530,12 +1531,12 @@ the task block on execution</p>
       <pre class="lines">
 
 
-222
-223
-224</pre>
+224
+225
+226</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 222</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 224</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_fulfill'>fulfill</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='const'>Promise</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span> <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='symbol'>:synchronized_set_state!</span><span class='comma'>,</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -1750,12 +1751,12 @@ the task block on execution</p>
       <pre class="lines">
 
 
-235
-236
-237</pre>
+237
+238
+239</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 235</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 237</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span> <span class='id identifier rubyid_opts'>opts</span> <span class='op'>=</span> <span class='lbrace'>{</span><span class='rbrace'>}</span><span class='rparen'>)</span>
   <span class='const'>Promise</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_opts'>opts</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tap'>tap</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_p'>p</span><span class='op'>|</span> <span class='id identifier rubyid_p'>p</span><span class='period'>.</span><span class='id identifier rubyid_send'>send</span><span class='lparen'>(</span><span class='symbol'>:synchronized_set_state!</span><span class='comma'>,</span> <span class='kw'>false</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -1819,20 +1820,20 @@ and fails if any of them fails.</p>
       <pre class="lines">
 
 
-384
-385
-386
-387
-388
 389
 390
 391
 392
 393
-394</pre>
+394
+395
+396
+397
+398
+399</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 384</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 389</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_zip'>zip</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_promises'>promises</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_zero'>zero</span> <span class='op'>=</span> <span class='id identifier rubyid_fulfill'>fulfill</span><span class='lparen'>(</span><span class='lbracket'>[</span><span class='rbracket'>]</span><span class='comma'>,</span> <span class='label'>executor:</span> <span class='const'>ImmediateExecutor</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
@@ -1900,8 +1901,6 @@ Does nothing if the <code>Promise</code> is in any state other than <code>:unsch
       <pre class="lines">
 
 
-244
-245
 246
 247
 248
@@ -1910,10 +1909,12 @@ Does nothing if the <code>Promise</code> is in any state other than <code>:unsch
 251
 252
 253
-254</pre>
+254
+255
+256</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 244</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 246</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_execute'>execute</span>
   <span class='kw'>if</span> <span class='id identifier rubyid_root?'>root?</span>
@@ -1993,7 +1994,7 @@ Does nothing if the <code>Promise</code> is in any state other than <code>:unsch
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../root/Concurrent.html#MultipleAssignmentError-constant" title="Concurrent::MultipleAssignmentError (constant)">Concurrent::MultipleAssignmentError</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="MultipleAssignmentError.html" title="Concurrent::MultipleAssignmentError (class)">Concurrent::MultipleAssignmentError</a></span></tt>)</span>
       
       
       
@@ -2025,12 +2026,12 @@ been set or otherwise completed</p>
       <pre class="lines">
 
 
-275
-276
-277</pre>
+277
+278
+279</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 275</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 277</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fail'>fail</span><span class='lparen'>(</span><span class='id identifier rubyid_reason'>reason</span> <span class='op'>=</span> <span class='const'>StandardError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_set'>set</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_raise'>raise</span> <span class='id identifier rubyid_reason'>reason</span> <span class='rbrace'>}</span>
@@ -2088,11 +2089,6 @@ If either part fails the whole also fails.</p>
       <pre class="lines">
 
 
-357
-358
-359
-360
-361
 362
 363
 364
@@ -2107,10 +2103,15 @@ If either part fails the whole also fails.</p>
 373
 374
 375
-376</pre>
+376
+377
+378
+379
+380
+381</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 357</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 362</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_flat_map'>flat_map</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_child'>child</span> <span class='op'>=</span> <span class='const'>Promise</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
@@ -2210,13 +2211,13 @@ If either part fails the whole also fails.</p>
       <pre class="lines">
 
 
-331
-332
-333
-334</pre>
+336
+337
+338
+339</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 331</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 336</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_on_success'>on_success</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>no block given</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
@@ -2291,12 +2292,12 @@ If either part fails the whole also fails.</p>
       <pre class="lines">
 
 
-342
-343
-344</pre>
+347
+348
+349</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 342</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 347</span>
 
 <span class='kw'>def</span> <span class='kw'>rescue</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_then'>then</span><span class='lparen'>(</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -2398,7 +2399,7 @@ If either part fails the whole also fails.</p>
     <li>
       
       
-        <span class='type'>(<tt><span class='object_link'><a href="../root/Concurrent.html#MultipleAssignmentError-constant" title="Concurrent::MultipleAssignmentError (constant)">Concurrent::MultipleAssignmentError</a></span></tt>)</span>
+        <span class='type'>(<tt><span class='object_link'><a href="MultipleAssignmentError.html" title="Concurrent::MultipleAssignmentError (class)">Concurrent::MultipleAssignmentError</a></span></tt>)</span>
       
       
       
@@ -2430,8 +2431,6 @@ been set or otherwise completed</p>
       <pre class="lines">
 
 
-259
-260
 261
 262
 263
@@ -2441,10 +2440,12 @@ been set or otherwise completed</p>
 267
 268
 269
-270</pre>
+270
+271
+272</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 259</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 261</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='const'>NULL</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>PromiseExecutionError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>supported only on root promise</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>unless</span> <span class='id identifier rubyid_root?'>root?</span>
@@ -2466,7 +2467,7 @@ been set or otherwise completed</p>
       <div class="method_details ">
   <h3 class="signature " id="then-instance_method">
   
-    - (<tt><span class='object_link'><a href="" title="Concurrent::Promise (class)">Promise</a></span></tt>) <strong>then</strong>(rescuer = nil) { ... }
+    - (<tt><span class='object_link'><a href="" title="Concurrent::Promise (class)">Promise</a></span></tt>) <strong>then</strong>(rescuer = nil, executor = @executor) { ... }
   
 
   
@@ -2475,6 +2476,8 @@ been set or otherwise completed</p>
 </h3><div class="docstring">
   <div class="discussion">
     <p>Chain a new promise off the current promise.</p>
+
+<p>in the new Promise</p>
 
 
   </div>
@@ -2497,6 +2500,23 @@ been set or otherwise completed</p>
         &mdash;
         <div class='inline'><p>An optional rescue block to be executed if the
 promise is rejected.</p>
+</div>
+      
+    </li>
+  
+    <li>
+      
+        <span class='name'>executor</span>
+      
+      
+        <span class='type'>(<tt>ThreadPool</tt>)</span>
+      
+      
+        <em class="default">(defaults to: <tt>@executor</tt>)</em>
+      
+      
+        &mdash;
+        <div class='inline'><p>An optional thread pool executor to be used</p>
 </div>
       
     </li>
@@ -2557,11 +2577,6 @@ promise is rejected.</p>
       <pre class="lines">
 
 
-305
-306
-307
-308
-309
 310
 311
 312
@@ -2575,17 +2590,22 @@ promise is rejected.</p>
 320
 321
 322
-323</pre>
+323
+324
+325
+326
+327
+328</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 305</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 310</span>
 
-<span class='kw'>def</span> <span class='kw'>then</span><span class='lparen'>(</span><span class='id identifier rubyid_rescuer'>rescuer</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
+<span class='kw'>def</span> <span class='kw'>then</span><span class='lparen'>(</span><span class='id identifier rubyid_rescuer'>rescuer</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_executor'>executor</span> <span class='op'>=</span> <span class='ivar'>@executor</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_raise'>raise</span> <span class='const'>ArgumentError</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>rescuers and block are both missing</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_rescuer'>rescuer</span><span class='period'>.</span><span class='id identifier rubyid_nil?'>nil?</span> <span class='op'>&amp;&amp;</span> <span class='op'>!</span><span class='id identifier rubyid_block_given?'>block_given?</span>
   <span class='id identifier rubyid_block'>block</span> <span class='op'>=</span> <span class='const'>Proc</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_result'>result</span><span class='op'>|</span> <span class='id identifier rubyid_result'>result</span> <span class='rbrace'>}</span> <span class='kw'>unless</span> <span class='id identifier rubyid_block_given?'>block_given?</span>
   <span class='id identifier rubyid_child'>child</span> <span class='op'>=</span> <span class='const'>Promise</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span>
     <span class='label'>parent:</span> <span class='kw'>self</span><span class='comma'>,</span>
-    <span class='label'>executor:</span> <span class='ivar'>@executor</span><span class='comma'>,</span>
+    <span class='label'>executor:</span> <span class='id identifier rubyid_executor'>executor</span><span class='comma'>,</span>
     <span class='label'>on_fulfill:</span> <span class='id identifier rubyid_block'>block</span><span class='comma'>,</span>
     <span class='label'>on_reject:</span> <span class='id identifier rubyid_rescuer'>rescuer</span>
   <span class='rparen'>)</span>
@@ -2658,12 +2678,12 @@ and fails if any of them fails.</p>
       <pre class="lines">
 
 
-402
-403
-404</pre>
+407
+408
+409</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 402</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/promise.rb', line 407</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_zip'>zip</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_others'>others</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_class'>class</span><span class='period'>.</span><span class='id identifier rubyid_zip'>zip</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='op'>*</span><span class='id identifier rubyid_others'>others</span><span class='rparen'>)</span>
@@ -2678,9 +2698,9 @@ and fails if any of them fails.</p>
 </div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:07:00 2016 by
+  Generated on Tue Dec 27 03:08:34 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>

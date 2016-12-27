@@ -122,7 +122,7 @@ If there are more than <code>min-threads</code> but less than <code>max-threads<
 </span><span class='rparen'>)</span>
 </code></pre>
 
-<p>If you wants to provide a maximum queue size, you may also consider the <code>fallback_policy</code> which defines what will happen if work is posted to a pool when the queue of waiting work has reached the maximum size and no new threads can be created. Available policies:</p>
+<p>If you want to provide a maximum queue size, you may also consider the <code>fallback_policy</code> which defines what will happen if work is posted to a pool when the queue of waiting work has reached the maximum size and no new threads can be created. Available policies:</p>
 
 <ul>
 <li>abort: Raise a <code>Concurrent::RejectedExecutionError</code> exception and discard the task. (default policy)</li>
@@ -216,7 +216,7 @@ If all 10 threads are busy and 100 tasks are already queued, additional tasks wi
   <span class='symbol'>:fallback_policy</span> <span class='op'>=&gt;</span> <span class='symbol'>:caller_runs</span>
 <span class='rparen'>)</span>
 
-<span class='id identifier rubyid_future'>future</span> <span class='op'>=</span> <span class='const'>Future</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:executor</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_pool'>pool</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span> <span class='kw'>do</span>
+<span class='id identifier rubyid_future'>future</span> <span class='op'>=</span> <span class='const'>Future</span><span class='period'>.</span><span class='id identifier rubyid_execute'>execute</span><span class='lparen'>(</span><span class='symbol'>:executor</span> <span class='op'>=&gt;</span> <span class='id identifier rubyid_pool'>pool</span><span class='rparen'>)</span> <span class='kw'>do</span>
    <span class='comment'>#work
 </span><span class='kw'>end</span>
 </code></pre>
@@ -242,9 +242,9 @@ If all 10 threads are busy and 100 tasks are already queued, additional tasks wi
 </div></div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:06:56 2016 by
+  Generated on Tue Dec 27 03:08:30 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>

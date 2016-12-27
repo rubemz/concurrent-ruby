@@ -101,14 +101,14 @@ Most classes in this library that expose a <code>#value</code> getter method do 
 <p>Object references in Ruby are mutable. This can lead to serious
 problems when the <span class='object_link'><a href="#value-instance_method" title="Concurrent::Concern::Dereferenceable#value (method)">#value</a></span> of an object is a mutable reference. Which
 is always the case unless the value is a <code>Fixnum</code>, <code>Symbol</code>, or similar
-&quot;primative&quot; data type. Each instance can be configured with a few
+&quot;primitive&quot; data type. Each instance can be configured with a few
 options that can help protect the program from potentially dangerous
-operations. Each of these options can be optionally set when the oject
+operations. Each of these options can be optionally set when the object
 instance is created:</p>
 
 <ul>
 <li><code>:dup_on_deref</code> When true the object will call the <code>#dup</code> method on
-the <code>value</code> object every time the <code>#value</code> methid is called
+the <code>value</code> object every time the <code>#value</code> method is called
 (default: false)</li>
 <li><code>:freeze_on_deref</code> When true the object will call the <code>#freeze</code>
 method on the <code>value</code> object every time the <code>#value</code> method is called
@@ -257,9 +257,9 @@ by the <code>#set_deref_options</code> method.</p>
 </div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:06:58 2016 by
+  Generated on Tue Dec 27 03:08:32 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>

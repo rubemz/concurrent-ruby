@@ -111,7 +111,7 @@
 
 <h2>Overview</h2><div class="docstring">
   <div class="discussion">
-    <p>A very common currency pattern is to run a thread that performs a task at
+    <p>A very common concurrency pattern is to run a thread that performs a task at
 regular intervals. The thread that performs the task sleeps for the given
 interval then wakes up and performs the task. Lather, rinse, repeat... This
 pattern causes two problems. First, it is difficult to test the business
@@ -125,7 +125,7 @@ can pose a significant problem. <code>TimerTask</code> alleviates both problems.
 execution interval. The <code>TimerTask</code> thread does not perform the task,
 however. Instead, the TimerTask launches the task on a separate thread.
 Should the task experience an unrecoverable crash only the task thread will
-crash. This makes the <code>TimerTask</code> very fault tolerant Additionally, the
+crash. This makes the <code>TimerTask</code> very fault tolerant. Additionally, the
 <code>TimerTask</code> thread can respond to the success or failure of the task,
 performing logging or ancillary operations. <code>TimerTask</code> can also be
 configured with a timeout value allowing it to kill a task that runs too
@@ -143,7 +143,7 @@ executed.</p>
 
 <p>The <code>TimerTask</code> class includes the <code>Dereferenceable</code> mixin module so the
 result of the last execution is always available via the <code>#value</code> method.
-Derefencing options can be passed to the <code>TimerTask</code> during construction or
+Dereferencing options can be passed to the <code>TimerTask</code> during construction or
 at any later time using the <code>#set_deref_options</code> method.</p>
 
 <p><code>TimerTask</code> supports notification through the Ruby standard library
@@ -158,14 +158,14 @@ object as the third argument.</p>
 <p>Object references in Ruby are mutable. This can lead to serious
 problems when the <span class='object_link'><a href="Concern/Dereferenceable.html#value-instance_method" title="Concurrent::Concern::Dereferenceable#value (method)">Concern::Dereferenceable#value</a></span> of an object is a mutable reference. Which
 is always the case unless the value is a <code>Fixnum</code>, <code>Symbol</code>, or similar
-&quot;primative&quot; data type. Each instance can be configured with a few
+&quot;primitive&quot; data type. Each instance can be configured with a few
 options that can help protect the program from potentially dangerous
-operations. Each of these options can be optionally set when the oject
+operations. Each of these options can be optionally set when the object
 instance is created:</p>
 
 <ul>
 <li><code>:dup_on_deref</code> When true the object will call the <code>#dup</code> method on
-the <code>value</code> object every time the <code>#value</code> methid is called
+the <code>value</code> object every time the <code>#value</code> method is called
 (default: false)</li>
 <li><code>:freeze_on_deref</code> When true the object will call the <code>#freeze</code>
 method on the <code>value</code> object every time the <code>#value</code> method is called
@@ -2006,9 +2006,9 @@ by the <code>#set_deref_options</code> method.</p>
 </div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:07:01 2016 by
+  Generated on Tue Dec 27 03:08:34 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>

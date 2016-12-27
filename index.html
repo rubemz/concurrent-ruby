@@ -72,39 +72,30 @@
 <a href="http://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/license-MIT-green.svg" alt="License"></a>
 <a href="https://gitter.im/ruby-concurrency/concurrent-ruby"><img src="https://img.shields.io/badge/IRC%20(gitter)-devs%20%26%20users-brightgreen.svg" alt="Gitter chat"></a></p>
 
-<table>
-  <tr>
-    <td align="left" valign="top">
-      <p>
-        Modern concurrency tools for Ruby. Inspired by
-        <a href="http://www.erlang.org/doc/reference_manual/processes.html">Erlang</a>,
-        <a href="http://clojure.org/concurrent_programming">Clojure</a>,
-        <a href="http://akka.io/">Scala</a>,
-        <a href="http://www.haskell.org/haskellwiki/Applications_and_libraries/Concurrency_and_parallelism#Concurrent_Haskell">Haskell</a>,
-        <a href="http://blogs.msdn.com/b/dsyme/archive/2010/02/15/async-and-parallel-design-patterns-in-f-part-3-agents.aspx">F#</a>,
-        <a href="http://msdn.microsoft.com/en-us/library/vstudio/hh191443.aspx">C#</a>,
-        <a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/package-summary.html">Java</a>,
-        and classic concurrency patterns.
-      </p>
-      <p>
-        The design goals of this gem are:
-        <ul>
-          <li>Be an 'unopinionated' toolbox that provides useful utilities without debating which is better or why</li>
-          <li>Remain free of external gem dependencies</li>
-          <li>Stay true to the spirit of the languages providing inspiration</li>
-          <li>But implement in a way that makes sense for Ruby</li>
-          <li>Keep the semantics as idiomatic Ruby as possible</li>
-          <li>Support features that make sense in Ruby</li>
-          <li>Exclude features that don't make sense in Ruby</li>
-          <li>Be small, lean, and loosely coupled</li>
-        </ul>
-      </p>
-    </td>
-    <td align="right" valign="top">
-      <img src="https://raw.githubusercontent.com/ruby-concurrency/concurrent-ruby/master/doc/logo/concurrent-ruby-logo-300x300.png"/>
-    </td>
-  </tr>
-</table>
+<p>Modern concurrency tools for Ruby. Inspired by
+<a href="http://www.erlang.org/doc/reference_manual/processes.html">Erlang</a>,
+<a href="http://clojure.org/concurrent_programming">Clojure</a>,
+<a href="http://akka.io/">Scala</a>,
+<a href="http://www.haskell.org/haskellwiki/Applications_and_libraries/Concurrency_and_parallelism#Concurrent_Haskell">Haskell</a>,
+<a href="http://blogs.msdn.com/b/dsyme/archive/2010/02/15/async-and-parallel-design-patterns-in-f-part-3-agents.aspx">F#</a>,
+<a href="http://msdn.microsoft.com/en-us/library/vstudio/hh191443.aspx">C#</a>,
+<a href="http://docs.oracle.com/javase/7/docs/api/java/util/concurrent/package-summary.html">Java</a>,
+and classic concurrency patterns.</p>
+
+<p><img src="https://raw.githubusercontent.com/ruby-concurrency/concurrent-ruby/master/doc/logo/concurrent-ruby-logo-300x300.png" align="right" style="margin-left: 20px;" /></p>
+
+<p>The design goals of this gem are:</p>
+
+<ul>
+<li>Be an &#39;unopinionated&#39; toolbox that provides useful utilities without debating which is better or why</li>
+<li>Remain free of external gem dependencies</li>
+<li>Stay true to the spirit of the languages providing inspiration</li>
+<li>But implement in a way that makes sense for Ruby</li>
+<li>Keep the semantics as idiomatic Ruby as possible</li>
+<li>Support features that make sense in Ruby</li>
+<li>Exclude features that don&#39;t make sense in Ruby</li>
+<li>Be small, lean, and loosely coupled</li>
+</ul>
 
 <h3>Supported Ruby versions</h3>
 
@@ -208,13 +199,13 @@ keep backward compatibility (there may also lack tests and documentation). Seman
 be obeyed though. Features developed in <code>concurrent-ruby-edge</code> are expected to move to <code>concurrent-ruby</code> when final.</p>
 
 <ul>
-<li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/Actor.html">Actor</a>:
-Implements the Actor Model, where concurrent actors exchange messages.</li>
-<li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/Edge/FutureShortcuts.html">New Future Framework</a>:
+<li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/Promises.html">Promises Framework</a>:
 Unified implementation of futures and promises which combines features of previous <code>Future</code>,
 <code>Promise</code>, <code>IVar</code>, <code>Event</code>, <code>dataflow</code>, <code>Delay</code>, and <code>TimerTask</code> into a single framework. It extensively uses the
 new synchronization layer to make all the features <strong>non-blocking</strong> and <strong>lock-free</strong>, with the exception of obviously blocking
 operations like <code>#wait</code>, <code>#value</code>. It also offers better performance.</li>
+<li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/Actor.html">Actor</a>:
+Implements the Actor Model, where concurrent actors exchange messages.</li>
 <li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/Edge/Channel.html">Channel</a>:
 Communicating Sequential Processes (<a href="https://en.wikipedia.org/wiki/Communicating_sequential_processes">CSP</a>).
 Functionally equivalent to Go <a href="https://tour.golang.org/concurrency/2">channels</a> with additional
@@ -222,7 +213,7 @@ inspiration from Clojure <a href="https://clojure.github.io/core.async/">core.as
 <li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/LazyRegister.html">LazyRegister</a></li>
 <li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/Edge/AtomicMarkableReference.html">AtomicMarkableReference</a></li>
 <li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/Edge/LockFreeLinkedSet.html">LockFreeLinkedSet</a></li>
-<li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/Edge/LockFreeStack.html">LockFreeStack</a></li>
+<li><a href="http://ruby-concurrency.github.io/concurrent-ruby/Concurrent/LockFreeStack.html">LockFreeStack</a></li>
 </ul>
 
 <h4>Statuses:</h4>
@@ -230,9 +221,10 @@ inspiration from Clojure <a href="https://clojure.github.io/core.async/">core.as
 <p><em>Why are these not in core?</em></p>
 
 <ul>
+<li><strong>Promises Framework</strong> - They are being finalized to be able to be moved to core. They&#39;ll deprecate old 
+implementation.</li>
 <li><strong>Actor</strong> - Partial documentation and tests; depends on new future/promise framework; stability is good.</li>
 <li><strong>Channel</strong> - Brand new implementation; partial documentation and tests; stability is good.</li>
-<li><strong>Future/Promise Framework</strong> - API changes; partial documentation and tests; stability is good.</li>
 <li><strong>LazyRegister</strong> - Missing documentation and tests.</li>
 <li><strong>AtomicMarkableReference, LockFreeLinkedSet, LockFreeStack</strong> - Need real world battle testing.</li>
 </ul>
@@ -310,8 +302,8 @@ The best practice is to depend on <code>concurrent-ruby</code> and let users to 
 <h2>Maintainers</h2>
 
 <ul>
+<li><a href="https://github.com/pitr-ch">Petr Chalupa</a> (lead maintainer)</li>
 <li><a href="https://github.com/jdantonio">Jerry D&#39;Antonio</a> (creator)</li>
-<li><a href="https://github.com/pitr-ch">Petr Chalupa</a></li>
 <li><a href="https://github.com/mighe">Michele Della Torre</a></li>
 <li><a href="https://github.com/chrisseaton">Chris Seaton</a></li>
 <li><a href="https://github.com/obrok">Paweł Obrok</a></li>
@@ -336,9 +328,9 @@ It is Copyright &copy; 2014 <a href="https://twitter.com/jerrydantonio">Jerry D&
 </div></div>
 
     <div id="footer">
-  Generated on Sat Feb 27 09:06:56 2016 by
+  Generated on Tue Dec 27 03:08:30 2016 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.2.3).
+  0.8.7.6 (ruby-2.3.1).
 </div>
 
 <script>
