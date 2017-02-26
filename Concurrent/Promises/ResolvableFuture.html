@@ -377,13 +377,13 @@ an exception the future rejects with it.</p>
       <pre class="lines">
 
 
-1274
-1275
-1276
-1277</pre>
+1300
+1301
+1302
+1303</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1274</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1300</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_evaluate_to'>evaluate_to</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='comment'># FIXME (pitr-ch 13-Jun-2016): add raise_on_reassign
@@ -484,12 +484,12 @@ an exception the future rejects with it.</p>
       <pre class="lines">
 
 
-1285
-1286
-1287</pre>
+1311
+1312
+1313</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1285</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1311</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_evaluate_to!'>evaluate_to!</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_promise'>promise</span><span class='period'>.</span><span class='id identifier rubyid_evaluate_to!'>evaluate_to!</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -564,12 +564,12 @@ is already resolved.</p>
       <pre class="lines">
 
 
-1257
-1258
-1259</pre>
+1283
+1284
+1285</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1257</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1283</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_fulfill'>fulfill</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_raise_on_reassign'>raise_on_reassign</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_promise'>promise</span><span class='period'>.</span><span class='id identifier rubyid_fulfill'>fulfill</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='comma'>,</span> <span class='id identifier rubyid_raise_on_reassign'>raise_on_reassign</span><span class='rparen'>)</span>
@@ -644,12 +644,12 @@ is already resolved.</p>
       <pre class="lines">
 
 
-1265
-1266
-1267</pre>
+1291
+1292
+1293</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1265</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1291</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span> <span class='id identifier rubyid_raise_on_reassign'>raise_on_reassign</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_promise'>promise</span><span class='period'>.</span><span class='id identifier rubyid_reject'>reject</span><span class='lparen'>(</span><span class='id identifier rubyid_reason'>reason</span><span class='comma'>,</span> <span class='id identifier rubyid_raise_on_reassign'>raise_on_reassign</span><span class='rparen'>)</span>
@@ -724,12 +724,12 @@ is already resolved.</p>
       <pre class="lines">
 
 
-1249
-1250
-1251</pre>
+1275
+1276
+1277</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1249</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1275</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_resolve'>resolve</span><span class='lparen'>(</span><span class='id identifier rubyid_fulfilled'>fulfilled</span> <span class='op'>=</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_raise_on_reassign'>raise_on_reassign</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_resolve_with'>resolve_with</span><span class='lparen'>(</span><span class='id identifier rubyid_fulfilled'>fulfilled</span> <span class='op'>?</span> <span class='const'>Fulfilled</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span><span class='rparen'>)</span> <span class='op'>:</span> <span class='const'>Rejected</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_reason'>reason</span><span class='rparen'>)</span><span class='comma'>,</span> <span class='id identifier rubyid_raise_on_reassign'>raise_on_reassign</span><span class='rparen'>)</span>
@@ -777,12 +777,12 @@ is already resolved.</p>
       <pre class="lines">
 
 
-1292
-1293
-1294</pre>
+1318
+1319
+1320</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1292</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 1318</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_with_hidden_resolvable'>with_hidden_resolvable</span>
   <span class='ivar'>@with_hidden_resolvable</span> <span class='op'>||=</span> <span class='const'>FutureWrapperPromise</span><span class='period'>.</span><span class='id identifier rubyid_new_blocked_by1'>new_blocked_by1</span><span class='lparen'>(</span><span class='kw'>self</span><span class='comma'>,</span> <span class='ivar'>@DefaultExecutor</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span>
@@ -797,9 +797,9 @@ is already resolved.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:40 2016 by
+  Generated on Sun Feb 26 18:16:44 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

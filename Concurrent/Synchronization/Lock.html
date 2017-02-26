@@ -101,7 +101,17 @@
 </dl>
 <div class="clear"></div>
 
+<h2>Overview</h2><div class="docstring">
+  <div class="discussion">
+    <p>TODO (pitr-ch 04-Dec-2016): should be in edge</p>
 
+
+  </div>
+</div>
+<div class="tags">
+  
+
+</div>
 
 
 
@@ -346,12 +356,12 @@
       <pre class="lines">
 
 
-26
 27
-28</pre>
+28
+29</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/lock.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/lock.rb', line 27</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_broadcast'>broadcast</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_ns_broadcast'>ns_broadcast</span> <span class='rbrace'>}</span>
@@ -424,12 +434,12 @@
       <pre class="lines">
 
 
-20
 21
-22</pre>
+22
+23</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/lock.rb', line 20</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/lock.rb', line 21</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_signal'>signal</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_ns_signal'>ns_signal</span> <span class='rbrace'>}</span>
@@ -466,12 +476,12 @@
       <pre class="lines">
 
 
-8
 9
-10</pre>
+10
+11</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/lock.rb', line 8</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/lock.rb', line 9</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait'>wait</span><span class='lparen'>(</span><span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_ns_wait'>ns_wait</span><span class='lparen'>(</span><span class='id identifier rubyid_timeout'>timeout</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -496,12 +506,12 @@
       <pre class="lines">
 
 
-14
 15
-16</pre>
+16
+17</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/lock.rb', line 14</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/lock.rb', line 15</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_wait_until'>wait_until</span><span class='lparen'>(</span><span class='id identifier rubyid_timeout'>timeout</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_condition'>condition</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_synchronize'>synchronize</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_ns_wait_until'>ns_wait_until</span><span class='lparen'>(</span><span class='id identifier rubyid_timeout'>timeout</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_condition'>condition</span><span class='rparen'>)</span> <span class='rbrace'>}</span>
@@ -516,9 +526,9 @@
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:37 2016 by
+  Generated on Sun Feb 26 18:16:40 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

@@ -383,7 +383,7 @@ e.g. when the tasks raises an exception.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#create-class_method" title="#create (class method)">+ (Event, Future) <strong>create</strong>(argument = nil, default_executor = :io) </a>
+      <a href="#create-class_method" title="#create (class method)">+ (Event, Future) <strong>create</strong>(argument = nil, default_executor = self.default_executor) </a>
     
 
     
@@ -403,6 +403,34 @@ e.g. when the tasks raises an exception.</p>
 
   
     <span class="summary_desc"><div class='inline'><p>General constructor.</p>
+</div></span>
+  
+</li>
+
+      
+        <li class="public ">
+  <span class="summary_signature">
+    
+      <a href="#default_executor-class_method" title="#default_executor (class method)">+ (Executor, :io, :fast) <strong>default_executor</strong> </a>
+    
+
+    
+  </span>
+  
+    <span class="note title not_defined_here">
+      extended
+      from <span class='object_link'><a href="Promises/FactoryMethods/Configuration.html#default_executor-class_method" title="Concurrent::Promises::FactoryMethods::Configuration#default_executor (method)">FactoryMethods::Configuration</a></span>
+    </span>
+  
+  
+  
+  
+  
+  
+  
+
+  
+    <span class="summary_desc"><div class='inline'><p>The executor which is used when none is supplied to a factory method.</p>
 </div></span>
   
 </li>
@@ -467,7 +495,7 @@ e.g. when the tasks raises an exception.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#fulfilled_future-class_method" title="#fulfilled_future (class method)">+ (Future) <strong>fulfilled_future</strong>(value, default_executor = :io) </a>
+      <a href="#fulfilled_future-class_method" title="#fulfilled_future (class method)">+ (Future) <strong>fulfilled_future</strong>(value, default_executor = self.default_executor) </a>
     
 
     
@@ -551,7 +579,7 @@ e.g. when the tasks raises an exception.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#rejected_future-class_method" title="#rejected_future (class method)">+ (Future) <strong>rejected_future</strong>(reason, default_executor = :io) </a>
+      <a href="#rejected_future-class_method" title="#rejected_future (class method)">+ (Future) <strong>rejected_future</strong>(reason, default_executor = self.default_executor) </a>
     
 
     
@@ -607,7 +635,7 @@ e.g. when the tasks raises an exception.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resolvable_event_on-class_method" title="#resolvable_event_on (class method)">+ (ResolvableEvent) <strong>resolvable_event_on</strong>(default_executor = :io) </a>
+      <a href="#resolvable_event_on-class_method" title="#resolvable_event_on (class method)">+ (ResolvableEvent) <strong>resolvable_event_on</strong>(default_executor = self.default_executor) </a>
     
 
     
@@ -663,7 +691,7 @@ e.g. when the tasks raises an exception.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resolvable_future_on-class_method" title="#resolvable_future_on (class method)">+ (ResolvableFuture) <strong>resolvable_future_on</strong>(default_executor = :io) </a>
+      <a href="#resolvable_future_on-class_method" title="#resolvable_future_on (class method)">+ (ResolvableFuture) <strong>resolvable_future_on</strong>(default_executor = self.default_executor) </a>
     
 
     
@@ -691,7 +719,7 @@ e.g. when the tasks raises an exception.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resolved_event-class_method" title="#resolved_event (class method)">+ (Event) <strong>resolved_event</strong>(default_executor = :io) </a>
+      <a href="#resolved_event-class_method" title="#resolved_event (class method)">+ (Event) <strong>resolved_event</strong>(default_executor = self.default_executor) </a>
     
 
     
@@ -719,7 +747,7 @@ e.g. when the tasks raises an exception.</p>
         <li class="public ">
   <span class="summary_signature">
     
-      <a href="#resolved_future-class_method" title="#resolved_future (class method)">+ (Future) <strong>resolved_future</strong>(fulfilled, value, reason, default_executor = :io) </a>
+      <a href="#resolved_future-class_method" title="#resolved_future (class method)">+ (Future) <strong>resolved_future</strong>(fulfilled, value, reason, default_executor = self.default_executor) </a>
     
 
     
@@ -946,6 +974,8 @@ e.g. when the tasks raises an exception.</p>
   
 
 
+  
+  
   
   
   
@@ -1337,15 +1367,15 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
   <h3 class="signature " id="create-class_method">
   
     
-      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>create</strong>(nil, default_executor = :io) </span>
+      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>create</strong>(nil, default_executor = self.default_executor) </span>
     
-      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(a_future, default_executor = :io) </span>
+      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(a_future, default_executor = self.default_executor) </span>
     
-      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>create</strong>(an_event, default_executor = :io) </span>
+      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>create</strong>(an_event, default_executor = self.default_executor) </span>
     
-      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(exception, default_executor = :io) </span>
+      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(exception, default_executor = self.default_executor) </span>
     
-      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(value, default_executor = :io) </span>
+      <span class="overload">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(value, default_executor = self.default_executor) </span>
     
   
 
@@ -1372,7 +1402,7 @@ but it&#39;s better to be explicit.</p>
     
       
       <li class="overload_item">
-        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>create</strong>(nil, default_executor = :io) </span>
+        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>create</strong>(nil, default_executor = self.default_executor) </span>
         <div class="docstring">
   <div class="discussion">
     <p>Returns resolved event.</p>
@@ -1420,7 +1450,7 @@ but it&#39;s better to be explicit.</p>
     
       
       <li class="overload_item">
-        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(a_future, default_executor = :io) </span>
+        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(a_future, default_executor = self.default_executor) </span>
         <div class="docstring">
   <div class="discussion">
     <p>Returns a future which will be resolved when a_future is.</p>
@@ -1468,7 +1498,7 @@ but it&#39;s better to be explicit.</p>
     
       
       <li class="overload_item">
-        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>create</strong>(an_event, default_executor = :io) </span>
+        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>create</strong>(an_event, default_executor = self.default_executor) </span>
         <div class="docstring">
   <div class="discussion">
     <p>Returns an event which will be resolved when an_event is.</p>
@@ -1516,7 +1546,7 @@ but it&#39;s better to be explicit.</p>
     
       
       <li class="overload_item">
-        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(exception, default_executor = :io) </span>
+        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(exception, default_executor = self.default_executor) </span>
         <div class="docstring">
   <div class="discussion">
     <p>Returns a rejected future with the exception as its reason.</p>
@@ -1564,7 +1594,7 @@ but it&#39;s better to be explicit.</p>
     
       
       <li class="overload_item">
-        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(value, default_executor = :io) </span>
+        <span class="signature">- (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>create</strong>(value, default_executor = self.default_executor) </span>
         <div class="docstring">
   <div class="discussion">
     <p>Returns a fulfilled future with the value.</p>
@@ -1626,7 +1656,7 @@ but it&#39;s better to be explicit.</p>
         <span class='type'>(<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>:io</tt>)</em>
+        <em class="default">(defaults to: <tt>self.default_executor</tt>)</em>
       
       
         &mdash;
@@ -1659,6 +1689,54 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
       <li>resolved_event, fulfilled_future</li>
     
   </ul>
+
+</div>
+</div>
+    
+      <div class="method_details ">
+  <h3 class="signature " id="default_executor-class_method">
+  
+    + (<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>) <strong>default_executor</strong> 
+  
+
+  
+
+  
+    <span class="not_defined_here">
+      Originally defined in module
+        <span class='object_link'><a href="Promises/FactoryMethods/Configuration.html#default_executor-class_method" title="Concurrent::Promises::FactoryMethods::Configuration#default_executor (method)">FactoryMethods::Configuration</a></span>
+    </span>
+  
+</h3><div class="docstring">
+  <div class="discussion">
+    <p>Returns the executor which is used when none is supplied
+to a factory method. The method can be overridden in the receivers of
+<code>include FactoryMethod</code></p>
+
+
+  </div>
+</div>
+<div class="tags">
+  
+<p class="tag_title">Returns:</p>
+<ul class="return">
+  
+    <li>
+      
+      
+        <span class='type'>(<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>)</span>
+      
+      
+      
+        &mdash;
+        <div class='inline'><p>the executor which is used when none is supplied
+to a factory method. The method can be overridden in the receivers of
+<code>include FactoryMethod</code></p>
+</div>
+      
+    </li>
+  
+</ul>
 
 </div>
 </div>
@@ -1827,7 +1905,7 @@ raised exception becomes <span class='object_link'><a href="Promises/Future.html
       <div class="method_details ">
   <h3 class="signature " id="fulfilled_future-class_method">
   
-    + (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>fulfilled_future</strong>(value, default_executor = :io) 
+    + (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>fulfilled_future</strong>(value, default_executor = self.default_executor) 
   
 
   
@@ -1857,7 +1935,7 @@ raised exception becomes <span class='object_link'><a href="Promises/Future.html
         <span class='type'>(<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>:io</tt>)</em>
+        <em class="default">(defaults to: <tt>self.default_executor</tt>)</em>
       
       
         &mdash;
@@ -2051,7 +2129,7 @@ raised exception becomes <span class='object_link'><a href="Promises/Future.html
       <div class="method_details ">
   <h3 class="signature " id="rejected_future-class_method">
   
-    + (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>rejected_future</strong>(reason, default_executor = :io) 
+    + (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>rejected_future</strong>(reason, default_executor = self.default_executor) 
   
 
   
@@ -2081,7 +2159,7 @@ raised exception becomes <span class='object_link'><a href="Promises/Future.html
         <span class='type'>(<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>:io</tt>)</em>
+        <em class="default">(defaults to: <tt>self.default_executor</tt>)</em>
       
       
         &mdash;
@@ -2161,7 +2239,7 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
       <div class="method_details ">
   <h3 class="signature " id="resolvable_event_on-class_method">
   
-    + (<tt><span class='object_link'><a href="Promises/ResolvableEvent.html" title="Concurrent::Promises::ResolvableEvent (class)">ResolvableEvent</a></span></tt>) <strong>resolvable_event_on</strong>(default_executor = :io) 
+    + (<tt><span class='object_link'><a href="Promises/ResolvableEvent.html" title="Concurrent::Promises::ResolvableEvent (class)">ResolvableEvent</a></span></tt>) <strong>resolvable_event_on</strong>(default_executor = self.default_executor) 
   
 
   
@@ -2192,7 +2270,7 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
         <span class='type'>(<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>:io</tt>)</em>
+        <em class="default">(defaults to: <tt>self.default_executor</tt>)</em>
       
       
         &mdash;
@@ -2272,7 +2350,7 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
       <div class="method_details ">
   <h3 class="signature " id="resolvable_future_on-class_method">
   
-    + (<tt><span class='object_link'><a href="Promises/ResolvableFuture.html" title="Concurrent::Promises::ResolvableFuture (class)">ResolvableFuture</a></span></tt>) <strong>resolvable_future_on</strong>(default_executor = :io) 
+    + (<tt><span class='object_link'><a href="Promises/ResolvableFuture.html" title="Concurrent::Promises::ResolvableFuture (class)">ResolvableFuture</a></span></tt>) <strong>resolvable_future_on</strong>(default_executor = self.default_executor) 
   
 
   
@@ -2304,7 +2382,7 @@ or <span class='object_link'><a href="Promises/ResolvableFuture.html#reject-inst
         <span class='type'>(<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>:io</tt>)</em>
+        <em class="default">(defaults to: <tt>self.default_executor</tt>)</em>
       
       
         &mdash;
@@ -2337,7 +2415,7 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
       <div class="method_details ">
   <h3 class="signature " id="resolved_event-class_method">
   
-    + (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>resolved_event</strong>(default_executor = :io) 
+    + (<tt><span class='object_link'><a href="Promises/Event.html" title="Concurrent::Promises::Event (class)">Event</a></span></tt>) <strong>resolved_event</strong>(default_executor = self.default_executor) 
   
 
   
@@ -2367,7 +2445,7 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
         <span class='type'>(<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>:io</tt>)</em>
+        <em class="default">(defaults to: <tt>self.default_executor</tt>)</em>
       
       
         &mdash;
@@ -2400,7 +2478,7 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
       <div class="method_details ">
   <h3 class="signature " id="resolved_future-class_method">
   
-    + (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>resolved_future</strong>(fulfilled, value, reason, default_executor = :io) 
+    + (<tt><span class='object_link'><a href="Promises/Future.html" title="Concurrent::Promises::Future (class)">Future</a></span></tt>) <strong>resolved_future</strong>(fulfilled, value, reason, default_executor = self.default_executor) 
   
 
   
@@ -2431,7 +2509,7 @@ the given reason.</p>
         <span class='type'>(<tt>Executor</tt>, <tt>:io</tt>, <tt>:fast</tt>)</span>
       
       
-        <em class="default">(defaults to: <tt>:io</tt>)</em>
+        <em class="default">(defaults to: <tt>self.default_executor</tt>)</em>
       
       
         &mdash;
@@ -2950,9 +3028,9 @@ executor parameter or changed with <span class='object_link'><a href="Promises/A
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:31 2016 by
+  Generated on Sun Feb 26 18:16:35 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

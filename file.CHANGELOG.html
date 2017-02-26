@@ -61,7 +61,30 @@
 
     <iframe id="search_frame"></iframe>
 
-    <div id="content"><div id='filecontents'><h2>Current Release v1.0.4 (27 Dec 2016)</h2>
+    <div id="content"><div id='filecontents'><h2>Release v1.0.5, edge v0.3.1 (26 Feb 2017)</h2>
+
+<p>concurrent-ruby:</p>
+
+<ul>
+<li>Documentation for Event and Semaphore</li>
+<li>Use Unsafe#fullFence and #loadFence directly since the shortcuts were removed in JRuby</li>
+<li>Do not depend on org.jruby.util.unsafe.UnsafeHolder</li>
+</ul>
+
+<p>concurrent-ruby-edge:</p>
+
+<ul>
+<li>(#620) Actors on Pool raise an error</li>
+<li>(#624) Delayed promises did not interact correctly with flatting
+
+<ul>
+<li>Fix arguments yielded by callback methods</li>
+</ul></li>
+<li>Overridable default executor in promises factory methods</li>
+<li>Asking actor to terminate will always resolve to <code>true</code></li>
+</ul>
+
+<h2>Release v1.0.4, edge v0.3.0 (27 Dec 2016)</h2>
 
 <p>concurrent-ruby:</p>
 
@@ -527,9 +550,9 @@ Please see the README for more detail.</li>
 </div></div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:30 2016 by
+  Generated on Sun Feb 26 18:16:34 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

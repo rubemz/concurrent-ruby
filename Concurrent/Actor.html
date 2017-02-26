@@ -80,7 +80,7 @@
   
     <dt class="r1 last">Defined in:</dt>
     <dd class="r1 last">lib/concurrent/actor.rb<span class="defines">,<br />
-  lib/concurrent/actor/core.rb,<br /> lib/concurrent/actor/root.rb,<br /> lib/concurrent/actor/utils.rb,<br /> lib/concurrent/actor/errors.rb,<br /> lib/concurrent/actor/context.rb,<br /> lib/concurrent/actor/envelope.rb,<br /> lib/concurrent/actor/reference.rb,<br /> lib/concurrent/actor/behaviour.rb,<br /> lib/concurrent/actor/type_check.rb,<br /> lib/concurrent/actor/utils/pool.rb,<br /> lib/concurrent/actor/utils/ad_hoc.rb,<br /> lib/concurrent/actor/utils/balancer.rb,<br /> lib/concurrent/actor/utils/broadcast.rb,<br /> lib/concurrent/actor/behaviour/awaits.rb,<br /> lib/concurrent/actor/behaviour/buffer.rb,<br /> lib/concurrent/actor/behaviour/pausing.rb,<br /> lib/concurrent/actor/behaviour/linking.rb,<br /> lib/concurrent/actor/public_delegations.rb,<br /> lib/concurrent/actor/behaviour/abstract.rb,<br /> lib/concurrent/actor/internal_delegations.rb,<br /> lib/concurrent/actor/behaviour/termination.rb,<br /> lib/concurrent/actor/behaviour/supervising.rb,<br /> lib/concurrent/actor/behaviour/sets_results.rb,<br /> lib/concurrent/actor/behaviour/removes_child.rb,<br /> lib/concurrent/actor/behaviour/executes_context.rb,<br /> lib/concurrent/actor/default_dead_letter_handler.rb,<br /> lib/concurrent/actor/behaviour/errors_on_unknown_message.rb</span>
+  lib/concurrent/actor/root.rb,<br /> lib/concurrent/actor/core.rb,<br /> lib/concurrent/actor/utils.rb,<br /> lib/concurrent/actor/errors.rb,<br /> lib/concurrent/actor/context.rb,<br /> lib/concurrent/actor/envelope.rb,<br /> lib/concurrent/actor/reference.rb,<br /> lib/concurrent/actor/behaviour.rb,<br /> lib/concurrent/actor/type_check.rb,<br /> lib/concurrent/actor/utils/pool.rb,<br /> lib/concurrent/actor/utils/ad_hoc.rb,<br /> lib/concurrent/actor/utils/balancer.rb,<br /> lib/concurrent/actor/utils/broadcast.rb,<br /> lib/concurrent/actor/behaviour/awaits.rb,<br /> lib/concurrent/actor/behaviour/buffer.rb,<br /> lib/concurrent/actor/behaviour/pausing.rb,<br /> lib/concurrent/actor/behaviour/linking.rb,<br /> lib/concurrent/actor/public_delegations.rb,<br /> lib/concurrent/actor/behaviour/abstract.rb,<br /> lib/concurrent/actor/internal_delegations.rb,<br /> lib/concurrent/actor/behaviour/termination.rb,<br /> lib/concurrent/actor/behaviour/supervising.rb,<br /> lib/concurrent/actor/behaviour/sets_results.rb,<br /> lib/concurrent/actor/behaviour/removes_child.rb,<br /> lib/concurrent/actor/behaviour/executes_context.rb,<br /> lib/concurrent/actor/default_dead_letter_handler.rb,<br /> lib/concurrent/actor/behaviour/errors_on_unknown_message.rb</span>
 </dd>
   
 </dl>
@@ -183,17 +183,18 @@ message received.</em></p>
 <span class='comment'># `link: true` makes the actor linked to root actor and supervised
 </span><span class='comment'># which is default behavior
 </span><span class='id identifier rubyid_adder'>adder</span> <span class='op'>=</span> <span class='const'>Adder</span><span class='period'>.</span><span class='id identifier rubyid_spawn'>spawn</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='symbol'>:adder</span><span class='comma'>,</span> <span class='label'>link:</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='label'>args:</span> <span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span><span class='rparen'>)</span>
-    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7ff3ababf828 /adder (Adder)&gt;
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7fbedd8e3d40 /adder (Adder)&gt;
 </span><span class='id identifier rubyid_adder'>adder</span><span class='period'>.</span><span class='id identifier rubyid_parent'>parent</span>
-    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7ff3abad7ba8 / (Concurrent::Actor::Root)&gt;
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7fbedbaa1e90 / (Concurrent::Actor::Root)&gt;
 </span>
 <span class='comment'># tell and forget
 </span><span class='id identifier rubyid_adder'>adder</span><span class='period'>.</span><span class='id identifier rubyid_tell'>tell</span><span class='lparen'>(</span><span class='symbol'>:add</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_tell'>tell</span><span class='lparen'>(</span><span class='symbol'>:add</span><span class='rparen'>)</span>
-    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7ff3ababf828 /adder (Adder)&gt;
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7fbedd8e3d40 /adder (Adder)&gt;
 </span><span class='comment'># ask to get result
 </span><span class='id identifier rubyid_adder'>adder</span><span class='period'>.</span><span class='id identifier rubyid_ask!'>ask!</span><span class='lparen'>(</span><span class='symbol'>:add</span><span class='rparen'>)</span>                                   <span class='comment'># =&gt; 4
 </span><span class='comment'># fail the actor
-</span><span class='id identifier rubyid_adder'>adder</span><span class='period'>.</span><span class='id identifier rubyid_ask!'>ask!</span><span class='lparen'>(</span><span class='symbol'>:bad</span><span class='rparen'>)</span> <span class='kw'>rescue</span> <span class='gvar'>$!</span>                         <span class='comment'># =&gt; #&lt;Concurrent::Actor::UnknownMessage: :bad&gt;
+</span><span class='id identifier rubyid_adder'>adder</span><span class='period'>.</span><span class='id identifier rubyid_ask!'>ask!</span><span class='lparen'>(</span><span class='symbol'>:bad</span><span class='rparen'>)</span> <span class='kw'>rescue</span> <span class='gvar'>$!</span>
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::UnknownMessage: :bad from #&lt;Thread:0x007fbedb8809b8&gt;&gt;
 </span><span class='comment'># actor is restarted with initial values
 </span><span class='id identifier rubyid_adder'>adder</span><span class='period'>.</span><span class='id identifier rubyid_ask!'>ask!</span><span class='lparen'>(</span><span class='symbol'>:add</span><span class='rparen'>)</span>                                   <span class='comment'># =&gt; 2
 </span><span class='id identifier rubyid_adder'>adder</span><span class='period'>.</span><span class='id identifier rubyid_ask!'>ask!</span><span class='lparen'>(</span><span class='symbol'>:terminate!</span><span class='rparen'>)</span>                            <span class='comment'># =&gt; true</span></pre></p>
@@ -265,13 +266,13 @@ Collection classes for Ruby</li>
 <span class='kw'>end</span> 
 
 <span class='id identifier rubyid_calculator'>calculator</span> <span class='op'>=</span> <span class='const'>Calculator</span><span class='period'>.</span><span class='id identifier rubyid_spawn'>spawn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>calculator</span><span class='tstring_end'>&#39;</span></span><span class='rparen'>)</span>
-    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7ff3ab0c4f80 /calculator (Calculator)&gt;
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7fbedba52d90 /calculator (Calculator)&gt;
 </span><span class='id identifier rubyid_addition'>addition</span> <span class='op'>=</span> <span class='id identifier rubyid_calculator'>calculator</span><span class='period'>.</span><span class='id identifier rubyid_ask'>ask</span> <span class='const'>Add</span><span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span> <span class='int'>2</span><span class='rbracket'>]</span>
-    <span class='comment'># =&gt; &lt;#Concurrent::Edge::Future:0x7ff3ab08e188 pending blocks:[]&gt;
+    <span class='comment'># =&gt; &lt;#Concurrent::Promises::Future:0x7fbedc05f7b0 pending&gt;
 </span><span class='id identifier rubyid_substraction'>substraction</span> <span class='op'>=</span> <span class='id identifier rubyid_calculator'>calculator</span><span class='period'>.</span><span class='id identifier rubyid_ask'>ask</span> <span class='const'>Subtract</span><span class='lbracket'>[</span><span class='int'>1</span><span class='comma'>,</span> <span class='float'>0.5</span><span class='rbracket'>]</span>
-    <span class='comment'># =&gt; &lt;#Concurrent::Edge::Future:0x7ff3ab9de940 pending blocks:[]&gt;
+    <span class='comment'># =&gt; &lt;#Concurrent::Promises::Future:0x7fbedd891388 pending&gt;
 </span><span class='id identifier rubyid_results'>results</span> <span class='op'>=</span> <span class='lparen'>(</span><span class='id identifier rubyid_addition'>addition</span> <span class='op'>&amp;</span> <span class='id identifier rubyid_substraction'>substraction</span><span class='rparen'>)</span>
-    <span class='comment'># =&gt; &lt;#Concurrent::Edge::Future:0x7ff3aa0b1b48 pending blocks:[]&gt;
+    <span class='comment'># =&gt; &lt;#Concurrent::Promises::Future:0x7fbedc04eeb0 pending&gt;
 </span><span class='id identifier rubyid_results'>results</span><span class='period'>.</span><span class='id identifier rubyid_value!'>value!</span>                                     <span class='comment'># =&gt; [3, 0.5]
 </span>
 <span class='id identifier rubyid_calculator'>calculator</span><span class='period'>.</span><span class='id identifier rubyid_ask!'>ask!</span> <span class='symbol'>:terminate!</span>                        <span class='comment'># =&gt; true</span></pre></p>
@@ -335,7 +336,7 @@ Uses <span class='object_link'><a href="Actor/Behaviour.html#restarting_behaviou
 </span><span class='id identifier rubyid_an_actor'>an_actor</span> <span class='op'>&lt;&lt;</span> <span class='symbol'>:boo</span> <span class='op'>&lt;&lt;</span> <span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:add</span><span class='comma'>,</span> <span class='int'>1</span><span class='rparen'>)</span> 
 <span class='id identifier rubyid_an_actor'>an_actor</span><span class='period'>.</span><span class='id identifier rubyid_ask!'>ask!</span><span class='lparen'>(</span><span class='const'>Message</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='symbol'>:value</span><span class='comma'>,</span> <span class='kw'>nil</span><span class='rparen'>)</span><span class='rparen'>)</span>            <span class='comment'># =&gt; 1
 </span><span class='id identifier rubyid_an_actor'>an_actor</span> <span class='op'>&lt;&lt;</span> <span class='symbol'>:terminate!</span>
-    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7ff3ab16edc8 /an_actor (AnActor)&gt;</span></pre></p>
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7fbedc137688 /an_actor (AnActor)&gt;</span></pre></p>
 
 <p>See methods of <span class='object_link'><a href="Actor/AbstractContext.html" title="Concurrent::Actor::AbstractContext (class)">AbstractContext</a></span> what else can be tweaked, e.g <span class='object_link'><a href="Actor/AbstractContext.html#default_reference_class-instance_method" title="Concurrent::Actor::AbstractContext#default_reference_class (method)">AbstractContext#default_reference_class</a></span></p>
 </p>
@@ -549,7 +550,7 @@ Blocking operations could starve the <code>default_task_pool</code>. However the
 <span class='kw'>end</span> 
 
 <span class='id identifier rubyid_actor_doing_io'>actor_doing_io</span> <span class='op'>=</span> <span class='const'>ActorDoingIO</span><span class='period'>.</span><span class='id identifier rubyid_spawn'>spawn</span> <span class='symbol'>:actor_doing_io</span>
-    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7ff3ab176b40 /actor_doing_io (ActorDoingIO)&gt;
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7fbedc146e80 /actor_doing_io (ActorDoingIO)&gt;
 </span><span class='id identifier rubyid_actor_doing_io'>actor_doing_io</span><span class='period'>.</span><span class='id identifier rubyid_executor'>executor</span> <span class='op'>==</span> <span class='const'>Concurrent</span><span class='period'>.</span><span class='id identifier rubyid_global_io_executor'>global_io_executor</span>
     <span class='comment'># =&gt; true
 </span>
@@ -570,10 +571,10 @@ Blocking operations could starve the <code>default_task_pool</code>. However the
 <span class='id identifier rubyid_pool'>pool</span> <span class='op'>=</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>Actor</span><span class='op'>::</span><span class='const'>Utils</span><span class='op'>::</span><span class='const'>Pool</span><span class='period'>.</span><span class='id identifier rubyid_spawn'>spawn</span><span class='lparen'>(</span><span class='tstring'><span class='tstring_beg'>&#39;</span><span class='tstring_content'>pool</span><span class='tstring_end'>&#39;</span></span><span class='comma'>,</span> <span class='int'>2</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_index'>index</span><span class='op'>|</span>
   <span class='const'>IOWorker</span><span class='period'>.</span><span class='id identifier rubyid_spawn'>spawn</span><span class='lparen'>(</span><span class='label'>name:</span> <span class='tstring'><span class='tstring_beg'>&quot;</span><span class='tstring_content'>worker-</span><span class='embexpr_beg'>#{</span><span class='id identifier rubyid_index'>index</span><span class='embexpr_end'>}</span><span class='tstring_end'>&quot;</span></span><span class='rparen'>)</span>
 <span class='kw'>end</span>
-    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7ff3abaac5c0 /pool (Concurrent::Actor::Utils::Pool)&gt;
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7fbedba83378 /pool (Concurrent::Actor::Utils::Pool)&gt;
 </span>
 <span class='id identifier rubyid_pool'>pool</span> <span class='op'>&lt;&lt;</span> <span class='int'>1</span> <span class='op'>&lt;&lt;</span> <span class='int'>2</span> <span class='op'>&lt;&lt;</span> <span class='int'>3</span> <span class='op'>&lt;&lt;</span> <span class='int'>4</span> <span class='op'>&lt;&lt;</span> <span class='int'>5</span> <span class='op'>&lt;&lt;</span> <span class='int'>6</span>
-    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7ff3abaac5c0 /pool (Concurrent::Actor::Utils::Pool)&gt;
+    <span class='comment'># =&gt; #&lt;Concurrent::Actor::Reference:0x7fbedba83378 /pool (Concurrent::Actor::Utils::Pool)&gt;
 </span>
 <span class='comment'># prints two lines each second
 </span><span class='comment'># /pool/worker-0 second:1414677666 message:1
@@ -1291,9 +1292,9 @@ To see the list of available options see <span class='object_link'><a href="Acto
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:31 2016 by
+  Generated on Sun Feb 26 18:16:34 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

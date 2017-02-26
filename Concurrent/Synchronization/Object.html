@@ -117,7 +117,7 @@
 
 </div><div id="subclasses">
   <h2>Direct Known Subclasses</h2>
-  <p class="children"><span class='object_link'><a href="../Atom.html" title="Concurrent::Atom (class)">Atom</a></span>, <span class='object_link'><a href="../Cancellation.html" title="Concurrent::Cancellation (class)">Cancellation</a></span>, <span class='object_link'><a href="../Cancellation/Token.html" title="Concurrent::Cancellation::Token (class)">Cancellation::Token</a></span>, <span class='object_link'><a href="../Channel/Tick.html" title="Concurrent::Channel::Tick (class)">Channel::Tick</a></span>, <span class='object_link'><a href="../Edge/AtomicMarkableReference.html" title="Concurrent::Edge::AtomicMarkableReference (class)">Edge::AtomicMarkableReference</a></span>, <span class='object_link'><a href="../Edge/LockFreeLinkedSet/Node.html" title="Concurrent::Edge::LockFreeLinkedSet::Node (class)">Edge::LockFreeLinkedSet::Node</a></span>, <span class='object_link'><a href="../LazyRegister.html" title="Concurrent::LazyRegister (class)">LazyRegister</a></span>, <span class='object_link'><a href="../LockFreeQueue.html" title="Concurrent::LockFreeQueue (class)">LockFreeQueue</a></span>, <span class='object_link'><a href="../LockFreeQueue/Node.html" title="Concurrent::LockFreeQueue::Node (class)">LockFreeQueue::Node</a></span>, <span class='object_link'><a href="../LockFreeStack.html" title="Concurrent::LockFreeStack (class)">LockFreeStack</a></span>, <span class='object_link'><a href="../MVar.html" title="Concurrent::MVar (class)">MVar</a></span>, <span class='object_link'><a href="../Maybe.html" title="Concurrent::Maybe (class)">Maybe</a></span>, <span class='object_link'><a href="../Promises/AbstractEventFuture.html" title="Concurrent::Promises::AbstractEventFuture (class)">Promises::AbstractEventFuture</a></span>, <span class='object_link'><a href="../Promises/Channel.html" title="Concurrent::Promises::Channel (class)">Promises::Channel</a></span>, <span class='object_link'><a href="../ReadWriteLock.html" title="Concurrent::ReadWriteLock (class)">ReadWriteLock</a></span>, <span class='object_link'><a href="../ReentrantReadWriteLock.html" title="Concurrent::ReentrantReadWriteLock (class)">ReentrantReadWriteLock</a></span>, <span class='object_link'><a href="../TVar.html" title="Concurrent::TVar (class)">TVar</a></span>, <span class='object_link'><a href="../Throttle.html" title="Concurrent::Throttle (class)">Throttle</a></span></p>
+  <p class="children"><span class='object_link'><a href="../Atom.html" title="Concurrent::Atom (class)">Atom</a></span>, <span class='object_link'><a href="../Cancellation.html" title="Concurrent::Cancellation (class)">Cancellation</a></span>, <span class='object_link'><a href="../Cancellation/Token.html" title="Concurrent::Cancellation::Token (class)">Cancellation::Token</a></span>, <span class='object_link'><a href="../Channel/Tick.html" title="Concurrent::Channel::Tick (class)">Channel::Tick</a></span>, <span class='object_link'><a href="../Edge/AtomicMarkableReference.html" title="Concurrent::Edge::AtomicMarkableReference (class)">Edge::AtomicMarkableReference</a></span>, <span class='object_link'><a href="../Edge/LockFreeLinkedSet/Node.html" title="Concurrent::Edge::LockFreeLinkedSet::Node (class)">Edge::LockFreeLinkedSet::Node</a></span>, <span class='object_link'><a href="../LazyRegister.html" title="Concurrent::LazyRegister (class)">LazyRegister</a></span>, <span class='object_link'><a href="../LockFreeQueue/Node.html" title="Concurrent::LockFreeQueue::Node (class)">LockFreeQueue::Node</a></span>, <span class='object_link'><a href="../MVar.html" title="Concurrent::MVar (class)">MVar</a></span>, <span class='object_link'><a href="../Maybe.html" title="Concurrent::Maybe (class)">Maybe</a></span>, <span class='object_link'><a href="../ProcessingActor.html" title="Concurrent::ProcessingActor (class)">ProcessingActor</a></span>, <span class='object_link'><a href="../Promises/AbstractEventFuture.html" title="Concurrent::Promises::AbstractEventFuture (class)">Promises::AbstractEventFuture</a></span>, <span class='object_link'><a href="../Promises/Channel.html" title="Concurrent::Promises::Channel (class)">Promises::Channel</a></span>, <span class='object_link'><a href="../ReadWriteLock.html" title="Concurrent::ReadWriteLock (class)">ReadWriteLock</a></span>, <span class='object_link'><a href="../ReentrantReadWriteLock.html" title="Concurrent::ReentrantReadWriteLock (class)">ReentrantReadWriteLock</a></span>, <span class='object_link'><a href="../TVar.html" title="Concurrent::TVar (class)">TVar</a></span>, <span class='object_link'><a href="../Throttle.html" title="Concurrent::Throttle (class)">Throttle</a></span></p>
 </div>
 
 
@@ -359,13 +359,13 @@
       <pre class="lines">
 
 
-34
 35
 36
-37</pre>
+37
+38</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 34</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 35</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span>
   <span class='kw'>super</span>
@@ -449,7 +449,6 @@ This method generates following methods: <code>value</code>, <code>value=(new_va
       <pre class="lines">
 
 
-92
 93
 94
 95
@@ -480,10 +479,11 @@ This method generates following methods: <code>value</code>, <code>value=(new_va
 120
 121
 122
-123</pre>
+123
+124</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 92</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 93</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_attr_atomic'>attr_atomic</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_names'>names</span><span class='rparen'>)</span>
   <span class='ivar'>@volatile_cas_fields</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -587,7 +587,7 @@ volatile (Java) semantic. The instance variable should be accessed oly through g
 </pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 26</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 27</span>
 
 </pre>
     </td>
@@ -621,7 +621,6 @@ any instance variables with CamelCase names and isn&#39;t <span class='object_li
       <pre class="lines">
 
 
-71
 72
 73
 74
@@ -632,10 +631,11 @@ any instance variables with CamelCase names and isn&#39;t <span class='object_li
 79
 80
 81
-82</pre>
+82
+83</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 71</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 72</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_ensure_safe_initialization_when_final_fields_are_present'>ensure_safe_initialization_when_final_fields_are_present</span>
   <span class='const'>Object</span><span class='period'>.</span><span class='id identifier rubyid_class_eval'>class_eval</span> <span class='kw'>do</span>
@@ -669,14 +669,14 @@ any instance variables with CamelCase names and isn&#39;t <span class='object_li
       <pre class="lines">
 
 
-54
 55
 56
 57
-58</pre>
+58
+59</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 54</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 55</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_object'>object</span> <span class='op'>=</span> <span class='kw'>super</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_block'>block</span><span class='rparen'>)</span>
@@ -729,7 +729,6 @@ same behaviour as Java&#39;s final fields.</p>
       <pre class="lines">
 
 
-50
 51
 52
 53
@@ -740,10 +739,11 @@ same behaviour as Java&#39;s final fields.</p>
 58
 59
 60
-61</pre>
+61
+62</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 50</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 51</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_safe_initialization!'>safe_initialization!</span>
   <span class='comment'># define only once, and not again in children
@@ -804,13 +804,13 @@ same behaviour as Java&#39;s final fields.</p>
       <pre class="lines">
 
 
-64
 65
 66
-67</pre>
+67
+68</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 64</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 65</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_safe_initialization?'>safe_initialization?</span>
   <span class='ivar'>@safe_initialization</span> <span class='op'>=</span> <span class='kw'>false</span> <span class='kw'>unless</span> <span class='kw'>defined?</span> <span class='ivar'>@safe_initialization</span>
@@ -884,14 +884,14 @@ same behaviour as Java&#39;s final fields.</p>
       <pre class="lines">
 
 
-127
 128
 129
 130
-131</pre>
+131
+132</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 127</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/synchronization/object.rb', line 128</span>
 
 <span class='kw'>def</span> <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_volatile_cas_fields'>volatile_cas_fields</span><span class='lparen'>(</span><span class='id identifier rubyid_inherited'>inherited</span> <span class='op'>=</span> <span class='kw'>true</span><span class='rparen'>)</span>
   <span class='ivar'>@volatile_cas_fields</span> <span class='op'>||=</span> <span class='lbracket'>[</span><span class='rbracket'>]</span>
@@ -908,9 +908,9 @@ same behaviour as Java&#39;s final fields.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:37 2016 by
+  Generated on Sun Feb 26 18:16:41 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

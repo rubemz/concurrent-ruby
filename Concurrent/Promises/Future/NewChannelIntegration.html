@@ -198,12 +198,12 @@ May take a moment if the channel is full.</p>
       <pre class="lines">
 
 
-2051
-2052
-2053</pre>
+2082
+2083
+2084</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 2051</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/promises.rb', line 2082</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_then_push_channel'>then_push_channel</span><span class='lparen'>(</span><span class='id identifier rubyid_channel'>channel</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_then'>then</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_value'>value</span><span class='op'>|</span> <span class='id identifier rubyid_channel'>channel</span><span class='period'>.</span><span class='id identifier rubyid_push'>push</span> <span class='id identifier rubyid_value'>value</span> <span class='rbrace'>}</span><span class='period'>.</span><span class='id identifier rubyid_flat_future'>flat_future</span>
@@ -218,9 +218,9 @@ May take a moment if the channel is full.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:32 2016 by
+  Generated on Sun Feb 26 18:16:36 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

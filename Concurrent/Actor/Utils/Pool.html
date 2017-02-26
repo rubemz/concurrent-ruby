@@ -456,7 +456,7 @@ The worker should be descendant of AbstractWorker and supervised, see example.</
   <span class='id identifier rubyid_envelope_to_redirect'>envelope_to_redirect</span> <span class='op'>=</span> <span class='kw'>if</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span>
                            <span class='id identifier rubyid_envelope'>envelope</span>
                          <span class='kw'>else</span>
-                           <span class='const'>Envelope</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='const'>Concurrent</span><span class='op'>::</span><span class='const'>Promises</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span><span class='comma'>,</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_sender'>sender</span><span class='comma'>,</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
+                           <span class='const'>Envelope</span><span class='period'>.</span><span class='id identifier rubyid_new'>new</span><span class='lparen'>(</span><span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_message'>message</span><span class='comma'>,</span> <span class='const'>Promises</span><span class='period'>.</span><span class='id identifier rubyid_resolvable_future'>resolvable_future</span><span class='comma'>,</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_sender'>sender</span><span class='comma'>,</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_address'>address</span><span class='rparen'>)</span>
                          <span class='kw'>end</span>
   <span class='id identifier rubyid_envelope_to_redirect'>envelope_to_redirect</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span><span class='period'>.</span><span class='id identifier rubyid_on_fulfillment!'>on_fulfillment!</span> <span class='lbrace'>{</span> <span class='ivar'>@balancer</span> <span class='op'>&lt;&lt;</span> <span class='symbol'>:subscribe</span> <span class='rbrace'>}</span> <span class='comment'># TODO check safety of @balancer reading
 </span>  <span class='id identifier rubyid_redirect'>redirect</span> <span class='ivar'>@balancer</span><span class='comma'>,</span> <span class='id identifier rubyid_envelope_to_redirect'>envelope_to_redirect</span>
@@ -471,9 +471,9 @@ The worker should be descendant of AbstractWorker and supervised, see example.</
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:36 2016 by
+  Generated on Sun Feb 26 18:16:40 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

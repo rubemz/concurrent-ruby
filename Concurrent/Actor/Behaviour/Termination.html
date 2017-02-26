@@ -665,7 +665,9 @@ Terminates all its children, does not wait until they are terminated.</p>
 76
 77
 78
-79</pre>
+79
+80
+81</pre>
     </td>
     <td>
       <pre class="code"><span class="info file"># File 'lib/concurrent/actor/behaviour/termination.rb', line 62</span>
@@ -681,7 +683,9 @@ Terminates all its children, does not wait until they are terminated.</p>
                      <span class='kw'>end</span>
 
   <span class='id identifier rubyid_all_terminations'>all_terminations</span><span class='period'>.</span><span class='id identifier rubyid_chain_resolvable'>chain_resolvable</span><span class='lparen'>(</span><span class='ivar'>@terminated</span><span class='rparen'>)</span>
-  <span class='id identifier rubyid_all_terminations'>all_terminations</span><span class='period'>.</span><span class='id identifier rubyid_chain_resolvable'>chain_resolvable</span><span class='lparen'>(</span><span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span><span class='rparen'>)</span> <span class='kw'>if</span> <span class='id identifier rubyid_envelope'>envelope</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span>
+  <span class='kw'>if</span> <span class='id identifier rubyid_envelope'>envelope</span> <span class='op'>&amp;&amp;</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span>
+    <span class='id identifier rubyid_all_terminations'>all_terminations</span><span class='period'>.</span><span class='id identifier rubyid_chain'>chain</span> <span class='lbrace'>{</span> <span class='op'>|</span><span class='id identifier rubyid_fulfilled'>fulfilled</span><span class='comma'>,</span> <span class='id identifier rubyid__'>_</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span><span class='op'>|</span> <span class='id identifier rubyid_envelope'>envelope</span><span class='period'>.</span><span class='id identifier rubyid_future'>future</span><span class='period'>.</span><span class='id identifier rubyid_resolve'>resolve</span> <span class='id identifier rubyid_fulfilled'>fulfilled</span><span class='comma'>,</span> <span class='kw'>true</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span> <span class='rbrace'>}</span>
+  <span class='kw'>end</span>
 
   <span class='id identifier rubyid_broadcast'>broadcast</span><span class='lparen'>(</span><span class='kw'>true</span><span class='comma'>,</span> <span class='lbracket'>[</span><span class='symbol'>:terminated</span><span class='comma'>,</span> <span class='id identifier rubyid_reason'>reason</span><span class='rbracket'>]</span><span class='rparen'>)</span> <span class='comment'># TODO do not end up in Dead Letter Router
 </span>  <span class='id identifier rubyid_parent'>parent</span> <span class='op'>&lt;&lt;</span> <span class='symbol'>:remove_child</span> <span class='kw'>if</span> <span class='id identifier rubyid_parent'>parent</span>
@@ -853,9 +857,9 @@ Terminates all its children, does not wait until they are terminated.</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:38 2016 by
+  Generated on Sun Feb 26 18:16:42 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

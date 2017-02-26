@@ -390,13 +390,13 @@ that can be updated atomically.</p>
       <pre class="lines">
 
 
+16
 17
 18
-19
-20</pre>
+19</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 17</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 16</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_initialize'>initialize</span><span class='lparen'>(</span><span class='id identifier rubyid_value'>value</span> <span class='op'>=</span> <span class='kw'>nil</span><span class='comma'>,</span> <span class='id identifier rubyid_mark'>mark</span> <span class='op'>=</span> <span class='kw'>false</span><span class='rparen'>)</span>
   <span class='kw'>super</span><span class='lparen'>(</span><span class='rparen'>)</span>
@@ -533,6 +533,7 @@ actual mark was not equal to the expected mark</p>
       <pre class="lines">
 
 
+36
 37
 38
 39
@@ -556,11 +557,10 @@ actual mark was not equal to the expected mark</p>
 57
 58
 59
-60
-61</pre>
+60</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 37</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 36</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_compare_and_set'>compare_and_set</span><span class='lparen'>(</span><span class='id identifier rubyid_expected_val'>expected_val</span><span class='comma'>,</span> <span class='id identifier rubyid_new_val'>new_val</span><span class='comma'>,</span> <span class='id identifier rubyid_expected_mark'>expected_mark</span><span class='comma'>,</span> <span class='id identifier rubyid_new_mark'>new_mark</span><span class='rparen'>)</span>
   <span class='comment'># Memoize a valid reference to the current AtomicReference for
@@ -634,12 +634,12 @@ actual mark was not equal to the expected mark</p>
       <pre class="lines">
 
 
+68
 69
-70
-71</pre>
+70</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 69</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 68</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_get'>get</span>
   <span class='id identifier rubyid_reference'>reference</span>
@@ -695,12 +695,12 @@ actual mark was not equal to the expected mark</p>
       <pre class="lines">
 
 
+86
 87
-88
-89</pre>
+88</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 87</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 86</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_mark'>mark</span>
   <span class='id identifier rubyid_reference'>reference</span><span class='lbracket'>[</span><span class='int'>1</span><span class='rbracket'>]</span>
@@ -787,12 +787,12 @@ the mark.</p>
       <pre class="lines">
 
 
+100
 101
-102
-103</pre>
+102</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 101</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 100</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_set'>set</span><span class='lparen'>(</span><span class='id identifier rubyid_new_val'>new_val</span><span class='comma'>,</span> <span class='id identifier rubyid_new_mark'>new_mark</span><span class='rparen'>)</span>
   <span class='kw'>self</span><span class='period'>.</span><span class='id identifier rubyid_reference'>reference</span> <span class='op'>=</span> <span class='const'>ImmutableArray</span><span class='lbracket'>[</span><span class='id identifier rubyid_new_val'>new_val</span><span class='comma'>,</span> <span class='id identifier rubyid_new_mark'>new_mark</span><span class='rbracket'>]</span>
@@ -899,17 +899,17 @@ reference using given (old) value and (old) marked</p>
       <pre class="lines">
 
 
+167
 168
 169
 170
 171
 172
 173
-174
-175</pre>
+174</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 168</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 167</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_try_update'>try_update</span>
   <span class='id identifier rubyid_old_val'>old_val</span><span class='comma'>,</span> <span class='id identifier rubyid_old_mark'>old_mark</span> <span class='op'>=</span> <span class='id identifier rubyid_reference'>reference</span>
@@ -1037,6 +1037,7 @@ reference using given (old) value and (old) marked</p>
       <pre class="lines">
 
 
+141
 142
 143
 144
@@ -1048,11 +1049,10 @@ reference using given (old) value and (old) marked</p>
 150
 151
 152
-153
-154</pre>
+153</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 142</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 141</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_try_update!'>try_update!</span>
   <span class='id identifier rubyid_old_val'>old_val</span><span class='comma'>,</span> <span class='id identifier rubyid_old_mark'>old_mark</span> <span class='op'>=</span> <span class='id identifier rubyid_reference'>reference</span>
@@ -1168,6 +1168,7 @@ reference using given (old) value and (old) marked</p>
       <pre class="lines">
 
 
+116
 117
 118
 119
@@ -1176,11 +1177,10 @@ reference using given (old) value and (old) marked</p>
 122
 123
 124
-125
-126</pre>
+125</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 117</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 116</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_update'>update</span>
   <span class='id identifier rubyid_loop'>loop</span> <span class='kw'>do</span>
@@ -1239,12 +1239,12 @@ reference using given (old) value and (old) marked</p>
       <pre class="lines">
 
 
+77
 78
-79
-80</pre>
+79</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 78</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/atomic_markable_reference.rb', line 77</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_value'>value</span>
   <span class='id identifier rubyid_reference'>reference</span><span class='lbracket'>[</span><span class='int'>0</span><span class='rbracket'>]</span>
@@ -1259,9 +1259,9 @@ reference using given (old) value and (old) marked</p>
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:39 2016 by
+  Generated on Sun Feb 26 18:16:43 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>

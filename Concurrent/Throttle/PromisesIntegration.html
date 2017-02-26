@@ -176,6 +176,16 @@
 </div>
 <div class="tags">
   
+  <div class="examples">
+    <p class="tag_title">Examples:</p>
+    
+      
+      <pre class="example code"><code><span class='id identifier rubyid_throttle'>throttle</span><span class='period'>.</span><span class='id identifier rubyid_throttled_future'>throttled_future</span><span class='lparen'>(</span><span class='int'>1</span><span class='rparen'>)</span> <span class='kw'>do</span> <span class='op'>|</span><span class='id identifier rubyid_arg'>arg</span><span class='op'>|</span>
+  <span class='id identifier rubyid_arg'>arg</span><span class='period'>.</span><span class='id identifier rubyid_succ'>succ</span>
+<span class='kw'>end</span></code></pre>
+    
+  </div>
+
 <p class="tag_title">Returns:</p>
 <ul class="return">
   
@@ -203,12 +213,12 @@
       <pre class="lines">
 
 
-135
-136
-137</pre>
+142
+143
+144</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/throttle.rb', line 135</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/throttle.rb', line 142</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_throttled_future'>throttled_future</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_trigger'>trigger</span><span class='period'>.</span><span class='id identifier rubyid_chain'>chain</span><span class='lparen'>(</span><span class='op'>*</span><span class='id identifier rubyid_args'>args</span><span class='comma'>,</span> <span class='op'>&amp;</span><span class='id identifier rubyid_task'>task</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_on_resolution!'>on_resolution!</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_release'>release</span> <span class='rbrace'>}</span>
@@ -323,12 +333,12 @@ of the block. When the last one resolves, <span class='object_link'><a href="../
       <pre class="lines">
 
 
-128
-129
-130</pre>
+134
+135
+136</pre>
     </td>
     <td>
-      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/throttle.rb', line 128</span>
+      <pre class="code"><span class="info file"># File 'lib/concurrent/edge/throttle.rb', line 134</span>
 
 <span class='kw'>def</span> <span class='id identifier rubyid_throttled_future_chain'>throttled_future_chain</span><span class='lparen'>(</span><span class='op'>&amp;</span><span class='id identifier rubyid_throttled_futures'>throttled_futures</span><span class='rparen'>)</span>
   <span class='id identifier rubyid_throttled_futures'>throttled_futures</span><span class='period'>.</span><span class='id identifier rubyid_call'>call</span><span class='lparen'>(</span><span class='id identifier rubyid_trigger'>trigger</span><span class='rparen'>)</span><span class='period'>.</span><span class='id identifier rubyid_on_resolution!'>on_resolution!</span> <span class='lbrace'>{</span> <span class='id identifier rubyid_release'>release</span> <span class='rbrace'>}</span>
@@ -343,9 +353,9 @@ of the block. When the last one resolves, <span class='object_link'><a href="../
 </div>
 
     <div id="footer">
-  Generated on Tue Dec 27 03:08:31 2016 by
+  Generated on Sun Feb 26 18:16:35 2017 by
   <a href="http://yardoc.org" title="Yay! A Ruby Documentation Tool" target="_parent">yard</a>
-  0.8.7.6 (ruby-2.3.1).
+  0.8.7.6 (ruby-2.4.0).
 </div>
 
 <script>
